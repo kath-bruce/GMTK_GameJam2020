@@ -1,0 +1,44 @@
+GMTK GAME JAM 2020 IDEAS
+
+OUT OF CONTROL is the theme
+
+WILL NEED TO PUT A DISCLAIMER ON THIS THAT IT'S NOT ACCURATE TO REAL LIFE COMPUTING!!!!!!!!!!!!!
+
+maybe player is an antivirus program trying to stop a virus from taking over a computer?
+	- virus was accidentally created by human user - password to disable it was taken from random file
+	- every action you take, another file is infected - anti virus can get its own power ups from license keys - this is how it learns to defend itself from the antivirus - only a matter of time until it deletes the operating system
+	- turn based
+	- a file can contain a clue or part of a password to disable the virus
+	- maybe sometimes you can direct the human user to help - stats of your human is random so how much help they are is out of your control
+		-- sometimes the human user does odd things to try to help like resetting pc to when virus is less powerful but keeping antivirus strong, plugging in usb which takes attention of virus, running the antivirus as administrator at the cost of a turn or 2, buy new upgrades (but may end up hindering - turn it off and on again therefore losing a turn, running another program taking away resources from the antivirus, deleting a file with a clue)
+	- scattered are license keys that will give the antivirus power ups
+	- different ways to kill the virus - put together the password to disable it, quarantine it, or somehow deleting it (if you can get the permission and know where the executable is)
+	- movement is through a file directory (tree) - up/down to change selection, left to go up a folder, right to go into a folder, enter to open menu on what to do
+	- quarantine it by finding where it is and use a quarantine function, if got the license
+	- find the password to disable it by finding where it is and inspecting the files???????
+	
+ABILITIES
+	- can freeze a folder if that is where you think an infected file is - only lasts a certain amount of time until virus finds it and breaks it, unless found a license for power up
+	- can scan a folder - takes time depending on how much to scan - to find more info
+	- can ask human to download tool - may forget password and have to reset password - will login in 3 turns instead of 1
+	- you can see where the infected files are - it's a challenge of navigating the file system to neutralise the infected files and getting to licenses
+	to power up and defeat the virus
+
+GAME ASPECTS!
+
+to implement
+		- player movement
+		- turn completion and logic on each movement
+		- virus doing its thing - maybe can choose which virus? depends on how easy it is to make more viruses
+			- virus is a semi random state machine? can change in behaviour as acquire licenses
+			- it moves like the player does
+		- player doing things based on randomised stats
+		- power ups
+		- ui - can see 'power level' of the virus and what it can do, can see your stats and licenses, what the human user is doing and saying
+		- display of file system - colour coded
+		- event log
+		- scanning files to reveal 'loot' - license, infection status, corruption status, encryption status
+		- different ways of finding password depending on virus
+			- maybe letters in password are stolen by virus from files, have to manually inspect them
+			- password is in encrypted file - have to find decryption key(s)
+			- 

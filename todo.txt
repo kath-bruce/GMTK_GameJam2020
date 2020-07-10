@@ -1,0 +1,17 @@
+TODO
+
+- before sleep
+
+	- setup
+	- player movement
+	- virus action
+	- human action
+	- turn logic and counter
+
+- tomorrow
+
+	- 
+	
+- sunday
+
+	-
