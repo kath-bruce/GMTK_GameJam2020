@@ -39,7 +39,7 @@ namespace Managers
             bin.Files.Add(new GameFile("actual password", GameFileExtension.TXT, bin));
             Root.Folders.Add(bin);
 
-            GameManager.UIManager.SetUpFolders(Root);
+            GameManager.UIManager.SetUpFileSystem(Root);
         }
 
     }

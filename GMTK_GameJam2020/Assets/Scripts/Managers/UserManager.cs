@@ -7,6 +7,5 @@ namespace Managers
     public class UserManager : MonoBehaviour
     {
         public GameManager GameManager { get; set; }
-
     }
 }
