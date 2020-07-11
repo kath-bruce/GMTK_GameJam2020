@@ -25,7 +25,7 @@ namespace Managers
             ComputerManager = CompManGameObj.GetComponent<ComputerManager>();
             PlayerManager = PlayManGameObj.GetComponent<PlayerManager>();
             TurnManager = TurnManGameObj.GetComponent<TurnManager>();
-            UIManager = TurnManGameObj.GetComponent<UIManager>();
+            UIManager = UIManGameObj.GetComponent<UIManager>();
             UserManager = UserManGameObj.GetComponent<UserManager>();
             VirusManager = VirusManGameObj.GetComponent<VirusManager>();
 

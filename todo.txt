@@ -7,6 +7,11 @@ TODO
 	- virus action
 	- human action
 	- turn logic and counter
+	
+	-root
+		-desktop
+		-documents
+		-recycle bin
 
 - tomorrow
 
