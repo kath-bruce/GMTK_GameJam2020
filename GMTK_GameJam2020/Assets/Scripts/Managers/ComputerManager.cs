@@ -65,7 +65,7 @@ namespace Managers
         public void AddToEventLog(string logText, Color textColor)
         {
             var eventText = Instantiate(EventPrefab, Vector3.zero, Quaternion.identity, EventLog.transform);
-            eventText.text = logText;
+            eventText.text = "> " + logText;
             eventText.color = textColor;
         }
 

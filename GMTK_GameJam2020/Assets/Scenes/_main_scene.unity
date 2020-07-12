@@ -239,6 +239,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Timer: 5
+  ChanceToMutate: 95
+  ChanceToInfectParent: 75
 --- !u!4 &61775186
 Transform:
   m_ObjectHideFlags: 0

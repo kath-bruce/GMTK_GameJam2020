@@ -371,7 +371,7 @@ namespace Managers
 
         void Quarantine()
         {
-
+            
         }
 
         void Clean()

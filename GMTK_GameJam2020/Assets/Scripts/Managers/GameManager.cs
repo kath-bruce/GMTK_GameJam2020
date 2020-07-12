@@ -10,7 +10,7 @@ namespace Managers
         private GameState state;
         public GameState State { 
             get => state; 
-            private set
+            set
             {
                 state = value;
 

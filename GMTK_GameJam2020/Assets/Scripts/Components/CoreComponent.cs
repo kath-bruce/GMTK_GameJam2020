@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Core;
+using System;
+using TMPro;
+using Managers;
 
 public class CoreComponent : MonoBehaviour
 {
@@ -10,6 +13,12 @@ public class CoreComponent : MonoBehaviour
     private float timer = 0f;
     private float elapsedTime = 0f;
     private bool startInfecting = false;
+
+    Func<bool> hasBreakQuarantineMutation;
+    Func<CoreBase, CoreComponent> getCoreComponent;
+    Action<string, Color> log;
+
+    GameManager manager;
 
     public void SetHighlight(bool highlight)
     {
@@ -23,13 +32,9 @@ public class CoreComponent : MonoBehaviour
 
     void Update()
     {
-        if (CoreElement.InfectionState == InfectionState.Infected && startInfecting)
+        if (CoreElement.InfectionState == InfectionState.Infected && startInfecting && manager.State == GameState.Playing)
         {
-            //random chance every virus action time to infect another file
-            //chance is determined by virus strength
-            //cannot go up into parent
-            //check if root
-            //get sibling - if not siblings, get parent
+            //only infect siblings
             elapsedTime += Time.deltaTime;
 
             if (elapsedTime >= timer)
@@ -40,23 +45,51 @@ public class CoreComponent : MonoBehaviour
                     //virus can break quarantine if upgraded
                     foreach (var file in CoreElement.ContainingFolder.Files)
                     {
-                        if (file.InfectionState == InfectionState.Clean)
+                        if (file.InfectionState != InfectionState.Infected)
                         {
-                            
+                            if (file.InfectionState == InfectionState.Clean)
+                            {
+                                getCoreComponent(file).Infect(0f, manager);
+                            }
+                            else if (file.InfectionState == InfectionState.Quarantined && hasBreakQuarantineMutation())
+                            {
+                                getCoreComponent(file).Infect(0f, manager);
+                            }
+                            log("Infected", Color.red);
                         }
                     }
                 }
                 else if (CoreElement.ContainingFolder.Folders.Count > 0)
                 {
                     //see above
+                    foreach (var folder in CoreElement.ContainingFolder.Folders)
+                    {
+                        if (folder.InfectionState != InfectionState.Infected)
+                        {
+                            if (folder.InfectionState == InfectionState.Clean)
+                            {
+                                getCoreComponent(folder).Infect(0f, manager);
+                            }
+                            else if (folder.InfectionState == InfectionState.Quarantined && hasBreakQuarantineMutation())
+                            {
+                                getCoreComponent(folder).Infect(0f, manager);
+                            }
+                            log("Infected", Color.red);
+                        }
+                    }
                 }
             }
         }
     }
 
-    public void Infect(float time) //time is usually 0, unless virus has upgraded
+    public void Infect(float time, GameManager gmanager) //time is usually 0, unless virus has upgraded
     {
+        manager = gmanager;
+        hasBreakQuarantineMutation = manager.VirusManager.HasBreakQuarantineMutation;
+        getCoreComponent = manager.UIManager.GetCoreComponent;
+        log = manager.ComputerManager.AddToEventLog;
         CoreElement.InfectionState = InfectionState.Infected;
+        GetComponent<TextMeshProUGUI>().color = new Color(0.75f, 0f, 1f); //purple
         if (time > 0f)
         {
             startInfecting = true;

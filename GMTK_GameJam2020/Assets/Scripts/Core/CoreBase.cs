@@ -2,7 +2,7 @@ using System;
 
 namespace Core
 {
-    public enum InfectionState { Null = -1, Unknown, Clean, Infected, Quarantined, ContainsInfected } //contains infected is purely informational
+    public enum InfectionState { Null = -1, Unknown, Clean, Infected, Quarantined, KnownInfection } //contains infected is purely informational
 
     public abstract class CoreBase
     {

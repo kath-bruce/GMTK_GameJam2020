@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Managers;
 
 public class TimeElapsedComponent : MonoBehaviour
 {
     private TextMeshProUGUI timeText;
     public float TimeElapsed { get; private set; } = 0f;
+    GameManager gameManager;
 
     void Start()
     {
@@ -20,11 +22,16 @@ public class TimeElapsedComponent : MonoBehaviour
                 break;
             }
         }
+
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     void Update()
     {
-        TimeElapsed += Time.deltaTime;
-        timeText.text = TimeElapsed.ToString("#0.00") + "s";
+        if (gameManager.State == GameState.Playing)
+        {
+            TimeElapsed += Time.deltaTime;
+            timeText.text = TimeElapsed.ToString("#0.00") + "s";
+        }
     }
 }
