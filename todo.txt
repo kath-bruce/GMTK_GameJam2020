@@ -6,28 +6,22 @@ challenge is in moving through the file system quickly, keeping on top of the in
 
 	- visual display of infection (white - unknown, purple - infected, green - clean, pink - contains infected (if folder))
 		- scanning only goes one level deep
-	- scroll so selection is always in view
-		- !!!!!!!!!!!!!! maybe only ever have one folder open in view (other than root)? scrolling just for event log
-	- event log - can click to expand - virus can something say stuff - another scroll view
-	- add action menu
-		- scan file - puts something in event log and opens folder (so have open flag on folder and instantiate but disable that and every child if not open)
-		- option to quarantine which takes time - more if infected - but wears off
-		- if license, upgrade - unless need password which human user might need to reset password taking time
-		- if missing letters, add letter to password
+	- quarantine - timer based on antivirus strength
 	- password - fills up as you find letters, random from pool
-	- options for displaying dialog to human for help
-	- licenses (upgrades)
-	- timer display - how long it takes for you to win is your score
-	- virus action timer display
-	- virus action - does something every 5 seconds? - relatively predictable but can mutate i.e., find licenses to gain speed, power (how many files it infects at once), 
+	- options for displaying dialog to human for help - consequences
+	- licenses (upgrades) - show both anti virus and virus licenses
+	- virus action - does something every 5 seconds? - relatively predictable but can mutate i.e., find licenses to gain speed, power (how many files it infects at once), break quarantined files quicker
 	- human action - random human intervention, see ideas files
 	- expand file system so there's a lot to explore - seed with licenses, jokes, password clues, dummy infected files, the virus itself
 	- proper game state management
+	- add to event log - which may need scripted scrolling but that should be easy enough
+	- win by getting permission or license to quarantine virus or finding password
 
 - tomorrow
 
 	- tutorial - click through slideshow
-	- loss and restart
+	- loss, win and restart
 	- clean up
 	- visuals
+	- sound fx - on events, depending if good or bad
 	- start screen

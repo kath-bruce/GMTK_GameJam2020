@@ -29,7 +29,7 @@ namespace Managers
             //ContentView.GetComponent<RectTransform>().rect.height;
             float y = Mathf.Abs(fileSystemRect.localPosition.y);
 
-            scrollRect.verticalNormalizedPosition = ((1 - (y / ContentView.GetComponent<RectTransform>().rect.height))/1);
+            scrollRect.verticalNormalizedPosition = ((1 - (y / ContentView.GetComponent<RectTransform>().rect.height)) / 1);
 
             if (scrollRect.verticalNormalizedPosition < 0.1f)
             {
@@ -40,7 +40,7 @@ namespace Managers
                 scrollRect.verticalNormalizedPosition = 1f;
             }
         }
-        
+
         public void SetVirusCountdown(float time)
         {
             VirusCountdown.text = time.ToString("#0.00s");
@@ -62,9 +62,30 @@ namespace Managers
                 coreComponents[i].CoreElement = options[i];
                 coreComponents[i].GetComponentInChildren<TextMeshProUGUI>().text = ">" + options[i].Name;
 
-                if (!isInfected && options[i].Name == "Quarantine")
+                if (isInfected)
                 {
-                    coreComponents[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
+                    if (options[i].Name == "Quarantine")
+                    {
+                        coreComponents[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.blue;
+                    }
+                    else if (options[i].Name == "Clean")
+                    {
+                        if (GameManager.PlayerManager.Licenses.HasFlag(Licenses.CleanInfectedFile))
+                        {
+                            coreComponents[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.blue;
+                        }
+                        else
+                        {
+                            coreComponents[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
+                        }
+                    }
+                }
+                else
+                {
+                    if (options[i].Name == "Quarantine" || options[i].Name == "Clean")
+                    {
+                        coreComponents[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
+                    }
                 }
             }
 
@@ -73,6 +94,7 @@ namespace Managers
 
         public void ClosePopup()
         {
+            GameManager.PlayerManager.DeselectMenuEntry();
             Popup.SetActive(false);
         }
 

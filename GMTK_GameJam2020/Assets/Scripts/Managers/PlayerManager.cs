@@ -10,11 +10,15 @@ namespace Managers
 {
     public enum PlayerNavigationState { FileSystem, MenuPopup }
 
+    [Flags]
+    public enum Licenses { None = 0, QuarantineVirus = 1, BetterQuarantine = 2, CleanInfectedFile = 4 }
+
     public class PlayerManager : MonoBehaviour
     {
         public GameManager GameManager { get; set; }
 
         public PlayerNavigationState NavState { get; private set; } = PlayerNavigationState.FileSystem;
+        public Licenses Licenses { get; set; }
 
         private CoreComponent selectedEntry;
         private CoreComponent selectedMenuEntry;
@@ -23,8 +27,9 @@ namespace Managers
 
         void Start()
         {
-            menuOptions.Add(new MenuAction("Scan", Scan));
-            menuOptions.Add(new MenuAction("Quarantine", Quarantine));
+            menuOptions.Add(new MenuAction("Scan", Scan)); //0
+            menuOptions.Add(new MenuAction("Quarantine", Quarantine)); //1
+            menuOptions.Add(new MenuAction("Clean", Clean)); //2
         }
 
         public void SetSelectedEntry(CoreComponent coreComp)
@@ -47,6 +52,11 @@ namespace Managers
 
             selectedMenuEntry = option;
             selectedMenuEntry.SetMenuHighlight(true);
+        }
+
+        public void DeselectMenuEntry()
+        {
+            selectedMenuEntry.SetMenuHighlight(false);
         }
 
         void OnNavigate(InputValue value)
@@ -282,20 +292,59 @@ namespace Managers
 
         private void NavigateMenuPopup(Vector2 dir)
         {
-            if (selectedEntry.CoreElement.InfectionState != InfectionState.Infected)
+            if (selectedEntry.CoreElement.InfectionState != InfectionState.Infected || dir.y == 0)
             {
                 return;
             }
 
             selectedMenuEntry.SetMenuHighlight(false);
 
-            if (selectedMenuEntry.CoreElement.Equals(menuOptions[0]))
+            if (dir.y > 0)
             {
-                SetSelectedMenuEntry(GameManager.UIManager.GetMenuCoreComponent(menuOptions[1]));
+                if (selectedMenuEntry.CoreElement.Equals(menuOptions[0]))
+                {
+                    //go to either 1 if no license, or 2 if license
+                    if (Licenses.HasFlag(Licenses.CleanInfectedFile))
+                    {
+                        SetSelectedMenuEntry(GameManager.UIManager.GetMenuCoreComponent(menuOptions[2]));
+                    }
+                    else
+                    {
+                        SetSelectedMenuEntry(GameManager.UIManager.GetMenuCoreComponent(menuOptions[1]));
+                    }
+                }
+                else if (selectedMenuEntry.CoreElement.Equals(menuOptions[1]))
+                {
+                    SetSelectedMenuEntry(GameManager.UIManager.GetMenuCoreComponent(menuOptions[0]));
+                }
+                else if (selectedMenuEntry.CoreElement.Equals(menuOptions[2]))
+                {
+                    SetSelectedMenuEntry(GameManager.UIManager.GetMenuCoreComponent(menuOptions[1]));
+                }
             }
-            else
+            else if (dir.y < 0)
             {
-                SetSelectedMenuEntry(GameManager.UIManager.GetMenuCoreComponent(menuOptions[0]));
+                if (selectedMenuEntry.CoreElement.Equals(menuOptions[0]))
+                {
+                    SetSelectedMenuEntry(GameManager.UIManager.GetMenuCoreComponent(menuOptions[1]));
+                }
+                else if (selectedMenuEntry.CoreElement.Equals(menuOptions[1]))
+                {
+                    //go to either 0 if no license, or 2 if license
+                    if (Licenses.HasFlag(Licenses.CleanInfectedFile))
+                    {
+                        SetSelectedMenuEntry(GameManager.UIManager.GetMenuCoreComponent(menuOptions[2]));
+                    }
+                    else
+                    {
+                        SetSelectedMenuEntry(GameManager.UIManager.GetMenuCoreComponent(menuOptions[0]));
+                    }
+
+                }
+                else if (selectedMenuEntry.CoreElement.Equals(menuOptions[2]))
+                {
+                    SetSelectedMenuEntry(GameManager.UIManager.GetMenuCoreComponent(menuOptions[0]));
+                }
             }
         }
 
@@ -314,6 +363,10 @@ namespace Managers
         void Scan()
         {
             //different CONSEQUENCES
+            //get license - some needs password for license upgrade - can clean files of infection to prevent spread
+            //update visual
+            //find password letter
+            //if infected - display colour
         }
 
         void Quarantine()
@@ -321,9 +374,21 @@ namespace Managers
 
         }
 
+        void Clean()
+        {
+
+        }
+
         void OnSubmit(InputValue value)
         {
-            (selectedMenuEntry.CoreElement as MenuAction).SelectionAction();
+            if (NavState == PlayerNavigationState.MenuPopup)
+            {
+                (selectedMenuEntry.CoreElement as MenuAction).SelectionAction();
+                //
+                GameManager.UIManager.ClosePopup();
+
+                NavState = PlayerNavigationState.FileSystem;
+            }
         }
 
         void OnCancel(InputValue value)
