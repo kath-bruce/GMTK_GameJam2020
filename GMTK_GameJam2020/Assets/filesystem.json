@@ -1,0 +1,148 @@
+{
+  "$type": "Core.GameFolder, Assembly-CSharp",
+  "Folders": {
+    "$type": "System.Collections.Generic.List`1[[Core.GameFolder, Assembly-CSharp]], mscorlib",
+    "$values": [
+      {
+        "$type": "Core.GameFolder, Assembly-CSharp",
+        "Folders": {
+          "$type": "System.Collections.Generic.List`1[[Core.GameFolder, Assembly-CSharp]], mscorlib",
+          "$values": [
+            {
+              "$type": "Core.GameFolder, Assembly-CSharp",
+              "Folders": {
+                "$type": "System.Collections.Generic.List`1[[Core.GameFolder, Assembly-CSharp]], mscorlib",
+                "$values": [
+                  {
+                    "$type": "Core.GameFolder, Assembly-CSharp",
+                    "Folders": {
+                      "$type": "System.Collections.Generic.List`1[[Core.GameFolder, Assembly-CSharp]], mscorlib",
+                      "$values": [
+                        {
+                          "$type": "Core.GameFolder, Assembly-CSharp",
+                          "Folders": {
+                            "$type": "System.Collections.Generic.List`1[[Core.GameFolder, Assembly-CSharp]], mscorlib",
+                            "$values": []
+                          },
+                          "Files": {
+                            "$type": "System.Collections.Generic.List`1[[Core.GameFile, Assembly-CSharp]], mscorlib",
+                            "$values": []
+                          },
+                          "Name": "test inner inner",
+                          "InfectionState": 1
+                        }
+                      ]
+                    },
+                    "Files": {
+                      "$type": "System.Collections.Generic.List`1[[Core.GameFile, Assembly-CSharp]], mscorlib",
+                      "$values": []
+                    },
+                    "Name": "test inner",
+                    "InfectionState": 1
+                  }
+                ]
+              },
+              "Files": {
+                "$type": "System.Collections.Generic.List`1[[Core.GameFile, Assembly-CSharp]], mscorlib",
+                "$values": [
+                  {
+                    "$type": "Core.GameFile, Assembly-CSharp",
+                    "Extension": 2,
+                    "IsVirus": true,
+                    "Name": "virus",
+                    "InfectionState": 2
+                  }
+                ]
+              },
+              "Name": "SECRET DOCUMENTS",
+              "InfectionState": 1
+            }
+          ]
+        },
+        "Files": {
+          "$type": "System.Collections.Generic.List`1[[Core.GameFile, Assembly-CSharp]], mscorlib",
+          "$values": []
+        },
+        "Name": "Desktop",
+        "InfectionState": 1
+      },
+      {
+        "$type": "Core.GameFolder, Assembly-CSharp",
+        "Folders": {
+          "$type": "System.Collections.Generic.List`1[[Core.GameFolder, Assembly-CSharp]], mscorlib",
+          "$values": []
+        },
+        "Files": {
+          "$type": "System.Collections.Generic.List`1[[Core.GameFile, Assembly-CSharp]], mscorlib",
+          "$values": [
+            {
+              "$type": "Core.GameFile, Assembly-CSharp",
+              "Extension": 4,
+              "IsVirus": false,
+              "Name": "password",
+              "InfectionState": 1
+            }
+          ]
+        },
+        "Name": "Documents",
+        "InfectionState": 1
+      },
+      {
+        "$type": "Core.GameFolder, Assembly-CSharp",
+        "Folders": {
+          "$type": "System.Collections.Generic.List`1[[Core.GameFolder, Assembly-CSharp]], mscorlib",
+          "$values": []
+        },
+        "Files": {
+          "$type": "System.Collections.Generic.List`1[[Core.GameFile, Assembly-CSharp]], mscorlib",
+          "$values": [
+            {
+              "$type": "Core.GameFile, Assembly-CSharp",
+              "Extension": 1,
+              "IsVirus": false,
+              "Name": "q0rn",
+              "InfectionState": 1
+            },
+            {
+              "$type": "Core.GameFile, Assembly-CSharp",
+              "Extension": 5,
+              "IsVirus": false,
+              "Name": "hill",
+              "InfectionState": 1
+            }
+          ]
+        },
+        "Name": "Images",
+        "InfectionState": 1
+      },
+      {
+        "$type": "Core.GameFolder, Assembly-CSharp",
+        "Folders": {
+          "$type": "System.Collections.Generic.List`1[[Core.GameFolder, Assembly-CSharp]], mscorlib",
+          "$values": []
+        },
+        "Files": {
+          "$type": "System.Collections.Generic.List`1[[Core.GameFile, Assembly-CSharp]], mscorlib",
+          "$values": [
+            {
+              "$type": "Core.GameFile, Assembly-CSharp",
+              "Extension": 4,
+              "IsVirus": false,
+              "Name": "actual password",
+              "InfectionState": 1
+            }
+          ]
+        },
+        "Name": "Recycle Bin",
+        "InfectionState": 1
+      }
+    ]
+  },
+  "Files": {
+    "$type": "System.Collections.Generic.List`1[[Core.GameFile, Assembly-CSharp]], mscorlib",
+    "$values": []
+  },
+  "Name": "Root",
+  "ContainingFolder": null,
+  "InfectionState": 1
+}

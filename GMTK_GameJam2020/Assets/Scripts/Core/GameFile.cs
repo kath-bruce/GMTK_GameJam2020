@@ -1,4 +1,4 @@
-
+using System;
 
 namespace Core
 {
@@ -7,9 +7,12 @@ namespace Core
     public class GameFile : CoreBase
     {
         public GameFileExtension Extension { get; set; }
+        public bool IsVirus { get; set; }
 
-        public GameFile(string name, GameFileExtension extension, GameFolder parent) : base(name, parent)
+        public GameFile(string name, GameFileExtension extension, GameFolder parent, InfectionState infectionState, bool isVirus)
+        : base(name, parent, infectionState)
         {
+            IsVirus = isVirus;
             Extension = extension;
         }
     }

@@ -780,17 +780,17 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Submit",
+                    "name": "Cancel",
                     "type": "Button",
-                    "id": "34ee69fe-b03f-4b87-8c13-9b065e5384f4",
+                    "id": "22841dc3-14f3-492c-9dff-5d8cb37deae7",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "Cancel",
+                    "name": "Submit",
                     "type": "Button",
-                    "id": "22841dc3-14f3-492c-9dff-5d8cb37deae7",
+                    "id": "171296e2-4c94-406f-8804-cbf89df07188",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -909,28 +909,6 @@
                 },
                 {
                     "name": "",
-                    "id": "e0957221-fc7e-40f0-8a41-6552841d6e5a",
-                    "path": "<Keyboard>/enter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Submit",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c38f5c9f-d0e2-4810-90b5-6a2cca7d57d5",
-                    "path": "<Keyboard>/numpadEnter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Submit",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "fae6fd29-fde1-41c4-8ea5-fc6144c4704b",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
@@ -948,6 +926,28 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9655584e-f924-4862-802b-0f9a97aa1e9f",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "09229234-5fb0-4699-baed-467023cdce8a",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Submit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

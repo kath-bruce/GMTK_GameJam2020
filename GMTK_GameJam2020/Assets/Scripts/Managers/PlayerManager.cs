@@ -8,11 +8,24 @@ using System.Linq;
 
 namespace Managers
 {
+    public enum PlayerNavigationState { FileSystem, MenuPopup }
+
     public class PlayerManager : MonoBehaviour
     {
         public GameManager GameManager { get; set; }
 
+        public PlayerNavigationState NavState { get; private set; } = PlayerNavigationState.FileSystem;
+
         private CoreComponent selectedEntry;
+        private CoreComponent selectedMenuEntry;
+
+        private List<MenuAction> menuOptions = new List<MenuAction>();
+
+        void Start()
+        {
+            menuOptions.Add(new MenuAction("Scan", Scan));
+            menuOptions.Add(new MenuAction("Quarantine", Quarantine));
+        }
 
         public void SetSelectedEntry(CoreComponent coreComp)
         {
@@ -25,9 +38,34 @@ namespace Managers
             selectedEntry.SetHighlight(true);
         }
 
+        public void SetSelectedMenuEntry(CoreComponent option)
+        {
+            if (option == null)
+            {
+                throw new InvalidOperationException("Attempting to set selected menu entry to null");
+            }
+
+            selectedMenuEntry = option;
+            selectedMenuEntry.SetMenuHighlight(true);
+        }
+
         void OnNavigate(InputValue value)
         {
             var dir = value.Get<Vector2>();
+
+            if (NavState == PlayerNavigationState.FileSystem)
+            {
+                NavigateFileSystem(dir);
+            }
+            else if (NavState == PlayerNavigationState.MenuPopup)
+            {
+                NavigateMenuPopup(dir);
+            }
+        }
+
+        private void NavigateFileSystem(Vector2 dir)
+        {
+
             //check if can move - possibly need to scroll so change content - ScrollRect.verticalNormalizedPosition
             //can only move in one dir so return on success (i.e., on every set selected entry call)
             if (dir.x > 0) //left
@@ -224,24 +262,60 @@ namespace Managers
                     }
                 }
             }
+
+        }
+
+        private void NavigateMenuPopup(Vector2 dir)
+        {
+            selectedMenuEntry.SetMenuHighlight(false);
+
+            if (selectedEntry.CoreElement.InfectionState == InfectionState.Infected)
+            {
+                return;
+            }
+
+            if (selectedMenuEntry.CoreElement.Equals(menuOptions[0]))
+            {
+                SetSelectedMenuEntry(GameManager.UIManager.GetMenuCoreComponent(menuOptions[1]));
+            }
+            else
+            {
+                SetSelectedMenuEntry(GameManager.UIManager.GetMenuCoreComponent(menuOptions[0]));
+            }
         }
 
         void OnAction(InputValue value)
         {
+            NavState = PlayerNavigationState.MenuPopup;
 
-            Debug.Log($"action : {value.Get<float>()}");
+            GameManager.UIManager.ShowPopup
+            (
+                selectedEntry.transform.position,
+                menuOptions,
+                (selectedEntry.CoreElement.InfectionState == InfectionState.Infected)
+            );
+        }
+
+        void Scan()
+        {
+
+        }
+
+        void Quarantine()
+        {
+
         }
 
         void OnSubmit(InputValue value)
         {
-
-            Debug.Log($"submit : {value.Get<float>()}");
+            (selectedMenuEntry.CoreElement as MenuAction).SelectionAction();
         }
 
         void OnCancel(InputValue value)
         {
+            GameManager.UIManager.ClosePopup();
 
-            Debug.Log($"cancel : {value.Get<float>()}");
+            NavState = PlayerNavigationState.FileSystem;
         }
 
     }

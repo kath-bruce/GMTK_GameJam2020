@@ -1,14 +1,20 @@
+using System;
+
 namespace Core
 {
+    public enum InfectionState { Null = -1, Unknown, Clean, Infected, Scanning, ContainsInfected }
+
     public abstract class CoreBase
     {
         public string Name { get; set; } = "Unknown";
         public GameFolder ContainingFolder { get; set; }
+        public InfectionState InfectionState { get; set; }
 
-        public CoreBase(string name, GameFolder parent)
+        public CoreBase(string name, GameFolder parent, InfectionState infectionState)
         {
             Name = name;
             ContainingFolder = parent;
+            InfectionState = infectionState;
         }
 
         public override int GetHashCode()
