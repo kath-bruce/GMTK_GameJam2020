@@ -25,8 +25,13 @@ namespace Managers
             if (timeElapsed >= Timer)
             {
                 //infected file
-                Debug.Log($"infect file");
+                //find random file to infect
+                //where set colours
+                Debug.Log($"infect file or folder");
                 
+                //set colour on thing
+                //if thing is root folder
+                //lose
                 timeElapsed = 0f;
             }
 

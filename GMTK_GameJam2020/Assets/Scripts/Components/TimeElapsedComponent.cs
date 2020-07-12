@@ -25,6 +25,6 @@ public class TimeElapsedComponent : MonoBehaviour
     void Update()
     {
         TimeElapsed += Time.deltaTime;
-        timeText.text = TimeElapsed.ToString("#.00") + "s";
+        timeText.text = TimeElapsed.ToString("#0.00") + "s";
     }
 }

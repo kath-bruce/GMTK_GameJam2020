@@ -77,12 +77,14 @@ namespace Managers
                     {
                         selectedEntry.SetHighlight(false);
                         SetSelectedEntry(GameManager.UIManager.GetCoreComponent((selectedEntry.CoreElement as GameFolder).Files[0]));
+                        GameManager.UIManager.SetFileSystemScroll(selectedEntry.GetComponent<RectTransform>());
                         return;
                     }
                     else if ((selectedEntry.CoreElement as GameFolder).Folders.Count > 0)
                     {
                         selectedEntry.SetHighlight(false);
                         SetSelectedEntry(GameManager.UIManager.GetCoreComponent((selectedEntry.CoreElement as GameFolder).Folders[0]));
+                        GameManager.UIManager.SetFileSystemScroll(selectedEntry.GetComponent<RectTransform>());
                         return;
                     }
                 }
@@ -99,6 +101,7 @@ namespace Managers
                 {
                     selectedEntry.SetHighlight(false);
                     SetSelectedEntry(GameManager.UIManager.GetCoreComponent(selectedEntry.CoreElement.ContainingFolder));
+                    GameManager.UIManager.SetFileSystemScroll(selectedEntry.GetComponent<RectTransform>());
                     return;
                 }
             }
@@ -129,6 +132,7 @@ namespace Managers
                             SetSelectedEntry(GameManager.UIManager.GetCoreComponent(
                                 selectedEntry.CoreElement.ContainingFolder.Folders.Last()
                             ));
+                            GameManager.UIManager.SetFileSystemScroll(selectedEntry.GetComponent<RectTransform>());
                             return;
                         }
                         else
@@ -137,6 +141,7 @@ namespace Managers
                             SetSelectedEntry(GameManager.UIManager.GetCoreComponent(
                                 selectedEntry.CoreElement.ContainingFolder.Files.Last()
                             ));
+                            GameManager.UIManager.SetFileSystemScroll(selectedEntry.GetComponent<RectTransform>());
                             return;
                         }
                     }
@@ -146,6 +151,7 @@ namespace Managers
                         SetSelectedEntry(GameManager.UIManager.GetCoreComponent(
                             selectedEntry.CoreElement.ContainingFolder.GetOlderSibling(selectedEntry.CoreElement as GameFile)
                         ));
+                        GameManager.UIManager.SetFileSystemScroll(selectedEntry.GetComponent<RectTransform>());
                         return;
                     }
                 }
@@ -162,6 +168,7 @@ namespace Managers
                             SetSelectedEntry(GameManager.UIManager.GetCoreComponent(
                                 selectedEntry.CoreElement.ContainingFolder.Files.Last()
                             ));
+                            GameManager.UIManager.SetFileSystemScroll(selectedEntry.GetComponent<RectTransform>());
                             return;
                         }
                         else
@@ -170,6 +177,7 @@ namespace Managers
                             SetSelectedEntry(GameManager.UIManager.GetCoreComponent(
                                 selectedEntry.CoreElement.ContainingFolder.Folders.Last()
                             ));
+                            GameManager.UIManager.SetFileSystemScroll(selectedEntry.GetComponent<RectTransform>());
                             return;
                         }
                     }
@@ -179,6 +187,7 @@ namespace Managers
                         SetSelectedEntry(GameManager.UIManager.GetCoreComponent(
                             selectedEntry.CoreElement.ContainingFolder.GetOlderSibling(selectedEntry.CoreElement as GameFolder)
                         ));
+                        GameManager.UIManager.SetFileSystemScroll(selectedEntry.GetComponent<RectTransform>());
                         return;
                     }
                 }
@@ -204,6 +213,7 @@ namespace Managers
                             SetSelectedEntry(GameManager.UIManager.GetCoreComponent(
                                 selectedEntry.CoreElement.ContainingFolder.Folders[0]
                             ));
+                            GameManager.UIManager.SetFileSystemScroll(selectedEntry.GetComponent<RectTransform>());
                             return;
                         }
                         else
@@ -212,6 +222,7 @@ namespace Managers
                             SetSelectedEntry(GameManager.UIManager.GetCoreComponent(
                                 selectedEntry.CoreElement.ContainingFolder.Files[0]
                             ));
+                            GameManager.UIManager.SetFileSystemScroll(selectedEntry.GetComponent<RectTransform>());
                             return;
                         }
                     }
@@ -221,6 +232,7 @@ namespace Managers
                         SetSelectedEntry(GameManager.UIManager.GetCoreComponent(
                             selectedEntry.CoreElement.ContainingFolder.GetYoungerSibling(selectedEntry.CoreElement as GameFile)
                         ));
+                        GameManager.UIManager.SetFileSystemScroll(selectedEntry.GetComponent<RectTransform>());
                         return;
                     }
 
@@ -241,6 +253,7 @@ namespace Managers
                             SetSelectedEntry(GameManager.UIManager.GetCoreComponent(
                                 selectedEntry.CoreElement.ContainingFolder.Files[0]
                             ));
+                            GameManager.UIManager.SetFileSystemScroll(selectedEntry.GetComponent<RectTransform>());
                             return;
                         }
                         else
@@ -249,6 +262,7 @@ namespace Managers
                             SetSelectedEntry(GameManager.UIManager.GetCoreComponent(
                                 selectedEntry.CoreElement.ContainingFolder.Folders[0]
                             ));
+                            GameManager.UIManager.SetFileSystemScroll(selectedEntry.GetComponent<RectTransform>());
                             return;
                         }
                     }
@@ -258,6 +272,7 @@ namespace Managers
                         SetSelectedEntry(GameManager.UIManager.GetCoreComponent(
                             selectedEntry.CoreElement.ContainingFolder.GetYoungerSibling(selectedEntry.CoreElement as GameFolder)
                         ));
+                        GameManager.UIManager.SetFileSystemScroll(selectedEntry.GetComponent<RectTransform>());
                         return;
                     }
                 }
@@ -267,12 +282,12 @@ namespace Managers
 
         private void NavigateMenuPopup(Vector2 dir)
         {
-            selectedMenuEntry.SetMenuHighlight(false);
-
-            if (selectedEntry.CoreElement.InfectionState == InfectionState.Infected)
+            if (selectedEntry.CoreElement.InfectionState != InfectionState.Infected)
             {
                 return;
             }
+
+            selectedMenuEntry.SetMenuHighlight(false);
 
             if (selectedMenuEntry.CoreElement.Equals(menuOptions[0]))
             {
@@ -298,7 +313,7 @@ namespace Managers
 
         void Scan()
         {
-
+            //different CONSEQUENCES
         }
 
         void Quarantine()

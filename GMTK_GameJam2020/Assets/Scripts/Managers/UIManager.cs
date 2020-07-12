@@ -17,7 +17,30 @@ namespace Managers
         public GameObject Popup;
         public int XOffset;
         public TextMeshProUGUI VirusCountdown;
+        public RectTransform FileSystemViewPort;
 
+        public void SetFileSystemScroll(RectTransform fileSystemRect)
+        {
+            ScrollRect scrollRect = FileSystemViewPort.parent.GetComponent<ScrollRect>();
+
+            //set position depending on how far down the rect is in the content
+
+            //fileSystemRect.localPosition.y;
+            //ContentView.GetComponent<RectTransform>().rect.height;
+            float y = Mathf.Abs(fileSystemRect.localPosition.y);
+
+            scrollRect.verticalNormalizedPosition = ((1 - (y / ContentView.GetComponent<RectTransform>().rect.height))/1);
+
+            if (scrollRect.verticalNormalizedPosition < 0.1f)
+            {
+                scrollRect.verticalNormalizedPosition = 0f;
+            }
+            else if (scrollRect.verticalNormalizedPosition > 0.9f)
+            {
+                scrollRect.verticalNormalizedPosition = 1f;
+            }
+        }
+        
         public void SetVirusCountdown(float time)
         {
             VirusCountdown.text = time.ToString("#0.00s");
@@ -39,7 +62,7 @@ namespace Managers
                 coreComponents[i].CoreElement = options[i];
                 coreComponents[i].GetComponentInChildren<TextMeshProUGUI>().text = ">" + options[i].Name;
 
-                if (isInfected)
+                if (!isInfected && options[i].Name == "Quarantine")
                 {
                     coreComponents[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
                 }

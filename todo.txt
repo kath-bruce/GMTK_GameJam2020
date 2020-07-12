@@ -27,6 +27,7 @@ challenge is in moving through the file system quickly, keeping on top of the in
 - tomorrow
 
 	- tutorial - click through slideshow
+	- loss and restart
 	- clean up
 	- visuals
 	- start screen

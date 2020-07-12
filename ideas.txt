@@ -26,16 +26,12 @@ ABILITIES
 GAME ASPECTS!
 
 to implement
-		- player movement
-		- turn completion and logic on each movement
 		- virus doing its thing - maybe can choose which virus? depends on how easy it is to make more viruses
 			- virus is a semi random state machine? can change in behaviour as acquire licenses
 			- it moves like the player does
 		- player doing things based on randomised stats
 		- power ups
-		- ui - can see 'power level' of the virus and what it can do, can see your stats and licenses, what the human user is doing and saying
 		- display of file system - colour coded
-		- event log
 		- scanning files to reveal 'loot' - license, infection status, corruption status, encryption status
 		- different ways of finding password depending on virus
 			- maybe letters in password are stolen by virus from files, have to manually inspect them

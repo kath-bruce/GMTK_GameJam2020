@@ -81,6 +81,76 @@
               "IsVirus": false,
               "Name": "password",
               "InfectionState": 1
+            },
+            {
+              "$type": "Core.GameFile, Assembly-CSharp",
+              "Extension": 4,
+              "IsVirus": false,
+              "Name": "doc0",
+              "InfectionState": 1
+            },
+            {
+              "$type": "Core.GameFile, Assembly-CSharp",
+              "Extension": 4,
+              "IsVirus": false,
+              "Name": "doc1",
+              "InfectionState": 1
+            },
+            {
+              "$type": "Core.GameFile, Assembly-CSharp",
+              "Extension": 4,
+              "IsVirus": false,
+              "Name": "doc2",
+              "InfectionState": 1
+            },
+            {
+              "$type": "Core.GameFile, Assembly-CSharp",
+              "Extension": 4,
+              "IsVirus": false,
+              "Name": "doc3",
+              "InfectionState": 1
+            },
+            {
+              "$type": "Core.GameFile, Assembly-CSharp",
+              "Extension": 4,
+              "IsVirus": false,
+              "Name": "doc4",
+              "InfectionState": 1
+            },
+            {
+              "$type": "Core.GameFile, Assembly-CSharp",
+              "Extension": 4,
+              "IsVirus": false,
+              "Name": "doc5",
+              "InfectionState": 1
+            },
+            {
+              "$type": "Core.GameFile, Assembly-CSharp",
+              "Extension": 4,
+              "IsVirus": false,
+              "Name": "doc6",
+              "InfectionState": 1
+            },
+            {
+              "$type": "Core.GameFile, Assembly-CSharp",
+              "Extension": 4,
+              "IsVirus": false,
+              "Name": "doc7",
+              "InfectionState": 1
+            },
+            {
+              "$type": "Core.GameFile, Assembly-CSharp",
+              "Extension": 4,
+              "IsVirus": false,
+              "Name": "doc8",
+              "InfectionState": 1
+            },
+            {
+              "$type": "Core.GameFile, Assembly-CSharp",
+              "Extension": 4,
+              "IsVirus": false,
+              "Name": "doc9",
+              "InfectionState": 1
             }
           ]
         },

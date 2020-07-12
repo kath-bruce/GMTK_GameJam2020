@@ -18,11 +18,11 @@ namespace Managers
 
         void Start()
         {
-            /*Root = new GameFolder("Root", null, InfectionState.Clean);
+            Root = new GameFolder("Root", null, InfectionState.Clean);
 
             var desktop = new GameFolder("Desktop", Root, InfectionState.Clean);
             var secret = new GameFolder("SECRET DOCUMENTS", desktop, InfectionState.Clean);
-            var thing = new GameFile("virus", GameFileExtension.BAT, secret, InfectionState.Clean, false);
+            var thing = new GameFile("virus", GameFileExtension.BAT, secret, InfectionState.Infected, true);
             var innerfolder = new GameFolder("test inner", secret, InfectionState.Clean);
             var innerinnerFolder = new GameFolder("test inner inner", innerfolder, InfectionState.Clean);
             innerfolder.Folders.Add(innerinnerFolder);
@@ -33,6 +33,15 @@ namespace Managers
 
             var documents = new GameFolder("Documents", Root, InfectionState.Clean);
             documents.Files.Add(new GameFile("password", GameFileExtension.TXT, documents, InfectionState.Clean, false));
+
+            var docFiles = new List<GameFile>();
+
+            for (int i = 0; i < 10; i++)
+            {
+                docFiles.Add(new GameFile($"doc{i}", GameFileExtension.TXT, documents, InfectionState.Clean, false));
+            }
+
+            documents.Files.AddRange(docFiles);
             Root.Folders.Add(documents);
 
             var images = new GameFolder("Images", Root, InfectionState.Clean);
@@ -44,7 +53,7 @@ namespace Managers
             bin.Files.Add(new GameFile("actual password", GameFileExtension.TXT, bin, InfectionState.Clean, false));
             Root.Folders.Add(bin);
 
-            Helpers.JsonHelper.SaveJson(Root, Path.Combine(Application.dataPath, "filesystem.json"));*/
+            Helpers.JsonHelper.SaveJson(Root, Path.Combine(Application.dataPath, "filesystem.json"));
 
             Root = Helpers.JsonHelper.LoadJson(Path.Combine(Application.dataPath, "filesystem.json"));
             Root.SetParents();
