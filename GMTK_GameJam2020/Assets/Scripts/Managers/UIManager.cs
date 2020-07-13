@@ -18,6 +18,18 @@ namespace Managers
         public int XOffset;
         public TextMeshProUGUI VirusCountdown;
         public RectTransform FileSystemViewPort;
+        public ScrollRect EventLogScroll;
+        public GameObject SpreadQuicker;
+        public GameObject SpreadEasier;
+        public GameObject BreakQuarantine;
+        public GameObject BetterQuarantine;
+        public GameObject CleanInfected;
+        public GameObject QuarantineVirus;
+
+        public void SetEventLogScroll()
+        {
+            EventLogScroll.verticalNormalizedPosition = 1f;
+        }
 
         public void SetFileSystemScroll(RectTransform fileSystemRect)
         {
@@ -62,15 +74,31 @@ namespace Managers
                 coreComponents[i].CoreElement = options[i];
                 coreComponents[i].GetComponentInChildren<TextMeshProUGUI>().text = ">" + options[i].Name;
 
-                if (isInfected)
+                if (options[i].Name == "Clean")
                 {
-                    if (options[i].Name == "Quarantine")
+                    if (isInfected && GameManager.PlayerManager.Licenses.HasFlag(Licenses.CleanInfected))
                     {
-                        coreComponents[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.blue;
+                        if (GameManager.PlayerManager.GetSelectedEntry().CoreElement is GameFile
+                        && (GameManager.PlayerManager.GetSelectedEntry().CoreElement as GameFile).IsVirus)
+                        {
+                            coreComponents[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
+                        }
+                        else
+                        {
+                            coreComponents[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.blue;
+                        }
                     }
-                    else if (options[i].Name == "Clean")
+                    else
                     {
-                        if (GameManager.PlayerManager.Licenses.HasFlag(Licenses.CleanInfectedFile))
+                        coreComponents[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
+                    }
+                }
+                else if (options[i].Name == "Quarantine")
+                {
+                    if (GameManager.PlayerManager.GetSelectedEntry().CoreElement is GameFile
+                        && (GameManager.PlayerManager.GetSelectedEntry().CoreElement as GameFile).IsVirus)
+                    {
+                        if (GameManager.PlayerManager.Licenses.HasFlag(Licenses.QuarantineVirus))
                         {
                             coreComponents[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.blue;
                         }
@@ -79,13 +107,14 @@ namespace Managers
                             coreComponents[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
                         }
                     }
+                    else
+                    {
+                        coreComponents[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.blue;
+                    }
                 }
                 else
                 {
-                    if (options[i].Name == "Quarantine" || options[i].Name == "Clean")
-                    {
-                        coreComponents[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
-                    }
+                    coreComponents[i].GetComponentInChildren<TextMeshProUGUI>().color = Color.blue;
                 }
             }
 

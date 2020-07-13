@@ -2,19 +2,22 @@ using System;
 
 namespace Core
 {
-    public enum InfectionState { Null = -1, Unknown, Clean, Infected, Quarantined, KnownInfection } //contains infected is purely informational
+    public enum InfectionState { Null = -1, Clean, Infected, Quarantined }
+    public enum ScanResult { Null = -1, License, PasswordLetter, Joke }
 
     public abstract class CoreBase
     {
         public string Name { get; set; } = "Unknown";
         public GameFolder ContainingFolder { get; set; }
         public InfectionState InfectionState { get; set; }
+        public ScanResult Result { get; set; }
 
-        public CoreBase(string name, GameFolder parent, InfectionState infectionState)
+        public CoreBase(string name, GameFolder parent, InfectionState infectionState, ScanResult result)
         {
             Name = name;
             ContainingFolder = parent;
             InfectionState = infectionState;
+            Result = result;
         }
 
         public override int GetHashCode()

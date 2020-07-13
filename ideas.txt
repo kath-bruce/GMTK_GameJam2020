@@ -2,7 +2,6 @@ GMTK GAME JAM 2020 IDEAS
 
 OUT OF CONTROL is the theme
 
-WILL NEED TO PUT A DISCLAIMER ON THIS THAT IT'S NOT ACCURATE TO REAL LIFE COMPUTING!!!!!!!!!!!!!
 
 maybe player is an antivirus program trying to stop a virus from taking over a computer?
 	- virus was accidentally created by human user - password to disable it was taken from random files - can't delete because antivirus doesn't have admin privileges
@@ -19,21 +18,5 @@ maybe player is an antivirus program trying to stop a virus from taking over a c
 ABILITIES
 	- quarantine folder - doesn't last forever
 	- can scan a folder - instant
-	- can ask human to download tool - may forget password and have to reset password - will login in 3 turns instead of 1
 	- you can see where the infected files are - it's a challenge of navigating the file system to neutralise the infected files and getting to licenses
 	to power up and defeat the virus
-
-GAME ASPECTS!
-
-to implement
-		- virus doing its thing - maybe can choose which virus? depends on how easy it is to make more viruses
-			- virus is a semi random state machine? can change in behaviour as acquire licenses
-			- it moves like the player does
-		- player doing things based on randomised stats
-		- power ups
-		- display of file system - colour coded
-		- scanning files to reveal 'loot' - license, infection status, corruption status, encryption status
-		- different ways of finding password depending on virus
-			- maybe letters in password are stolen by virus from files, have to manually inspect them
-			- password is in encrypted file - have to find decryption key(s)
-			- 

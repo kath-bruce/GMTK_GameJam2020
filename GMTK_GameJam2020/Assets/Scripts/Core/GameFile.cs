@@ -9,8 +9,8 @@ namespace Core
         public GameFileExtension Extension { get; set; }
         public bool IsVirus { get; set; }
 
-        public GameFile(string name, GameFileExtension extension, GameFolder parent, InfectionState infectionState, bool isVirus)
-        : base(name, parent, infectionState)
+        public GameFile(string name, GameFileExtension extension, GameFolder parent, InfectionState infectionState, ScanResult result, bool isVirus)
+        : base(name, parent, infectionState, result)
         {
             IsVirus = isVirus;
             Extension = extension;

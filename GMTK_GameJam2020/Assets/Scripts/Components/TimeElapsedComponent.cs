@@ -24,6 +24,7 @@ public class TimeElapsedComponent : MonoBehaviour
         }
 
         gameManager = FindObjectOfType<GameManager>();
+        gameManager.TimeElapsed = this;
     }
 
     void Update()

@@ -8,7 +8,7 @@ namespace Core
         public List<GameFolder> Folders { get; set; } = new List<GameFolder>();
         public List<GameFile> Files { get; set; } = new List<GameFile>();
 
-        public GameFolder(string name, GameFolder parent, InfectionState infectionState) : base(name, parent, infectionState) { }
+        public GameFolder(string name, GameFolder parent, InfectionState infectionState, ScanResult result) : base(name, parent, infectionState, result) { }
 
         public GameFile GetVirus()
         {

@@ -13,12 +13,15 @@ public class CoreComponent : MonoBehaviour
     private float timer = 0f;
     private float elapsedTime = 0f;
     private bool startInfecting = false;
+    private float quarantineTime = 0f;
+    private float elapsedQTime = 0f;
 
     Func<bool> hasBreakQuarantineMutation;
     Func<CoreBase, CoreComponent> getCoreComponent;
     Action<string, Color> log;
 
     GameManager manager;
+    InfectionState prevState;
 
     public void SetHighlight(bool highlight)
     {
@@ -34,7 +37,7 @@ public class CoreComponent : MonoBehaviour
     {
         if (CoreElement.InfectionState == InfectionState.Infected && startInfecting && manager.State == GameState.Playing)
         {
-            //only infect siblings
+            //only infect siblings and children
             elapsedTime += Time.deltaTime;
 
             if (elapsedTime >= timer)
@@ -50,16 +53,20 @@ public class CoreComponent : MonoBehaviour
                             if (file.InfectionState == InfectionState.Clean)
                             {
                                 getCoreComponent(file).Infect(0f, manager);
+                                log("Infected", Color.red);
+                                return;
                             }
                             else if (file.InfectionState == InfectionState.Quarantined && hasBreakQuarantineMutation())
                             {
                                 getCoreComponent(file).Infect(0f, manager);
+                                log("Infected", Color.red);
+                                return;
                             }
-                            log("Infected", Color.red);
                         }
                     }
                 }
-                else if (CoreElement.ContainingFolder.Folders.Count > 0)
+
+                if (CoreElement.ContainingFolder.Folders.Count > 0)
                 {
                     //see above
                     foreach (var folder in CoreElement.ContainingFolder.Folders)
@@ -69,15 +76,89 @@ public class CoreComponent : MonoBehaviour
                             if (folder.InfectionState == InfectionState.Clean)
                             {
                                 getCoreComponent(folder).Infect(0f, manager);
+                                log("Infected", Color.red);
+                                return;
                             }
                             else if (folder.InfectionState == InfectionState.Quarantined && hasBreakQuarantineMutation())
                             {
                                 getCoreComponent(folder).Infect(0f, manager);
+                                log("Infected", Color.red);
+                                return;
                             }
-                            log("Infected", Color.red);
                         }
                     }
                 }
+
+                if (CoreElement is GameFolder)
+                {
+                    var folder = CoreElement as GameFolder;
+
+                    if (folder.Files.Count > 0)
+                    {
+                        foreach (var file in folder.Files)
+                        {
+                            if (file.InfectionState != InfectionState.Infected)
+                            {
+                                if (file.InfectionState == InfectionState.Clean)
+                                {
+                                    getCoreComponent(file).Infect(0f, manager);
+                                    log("Infected", Color.red);
+                                    return;
+                                }
+                                else if (file.InfectionState == InfectionState.Quarantined && hasBreakQuarantineMutation())
+                                {
+                                    getCoreComponent(file).Infect(0f, manager);
+                                    log("Infected", Color.red);
+                                    return;
+                                }
+                            }
+                        }
+                    }
+
+                    if (folder.Folders.Count > 0)
+                    {
+                        foreach (var innerFolder in folder.Folders)
+                        {
+                            if (innerFolder.InfectionState != InfectionState.Infected)
+                            {
+                                if (innerFolder.InfectionState == InfectionState.Clean)
+                                {
+                                    getCoreComponent(folder).Infect(0f, manager);
+                                    log("Infected", Color.red);
+                                    return;
+                                }
+                                else if (innerFolder.InfectionState == InfectionState.Quarantined && hasBreakQuarantineMutation())
+                                {
+                                    getCoreComponent(folder).Infect(0f, manager);
+                                    log("Infected", Color.red);
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                elapsedTime = 0f;
+            }
+        }
+        else if (CoreElement.InfectionState == InfectionState.Quarantined && manager.State == GameState.Playing)
+        {
+            elapsedQTime += Time.deltaTime;
+
+            if (elapsedQTime >= quarantineTime)
+            {
+                CoreElement.InfectionState = prevState;
+                if (CoreElement.InfectionState == InfectionState.Clean)
+                {
+                    GetComponent<TextMeshProUGUI>().color = Color.white;
+
+                }
+                else if (CoreElement.InfectionState == InfectionState.Infected)
+                {
+                    GetComponent<TextMeshProUGUI>().color = new Color(0.75f, 0f, 1f);
+                }
+
+                elapsedQTime = 0f;
             }
         }
     }
@@ -95,5 +176,18 @@ public class CoreComponent : MonoBehaviour
             startInfecting = true;
             timer = time;
         }
+    }
+
+    public void Quarantine(float time, GameManager gManager)
+    {
+        manager = gManager;
+        if (CoreElement.InfectionState != InfectionState.Quarantined)
+        {
+            prevState = CoreElement.InfectionState;
+        }
+        CoreElement.InfectionState = InfectionState.Quarantined;
+        quarantineTime = time;
+        elapsedQTime = 0f;
+        GetComponent<TextMeshProUGUI>().color = Color.cyan;
     }
 }

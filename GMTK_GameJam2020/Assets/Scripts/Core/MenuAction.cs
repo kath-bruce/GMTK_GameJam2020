@@ -6,7 +6,7 @@ namespace Core
     {
         public Action SelectionAction { get; private set; }
 
-        public MenuAction(string name,  Action selectionAction) : base(name, null, InfectionState.Null)
+        public MenuAction(string name,  Action selectionAction) : base(name, null, InfectionState.Null, ScanResult.Null)
         {
             SelectionAction = selectionAction;
         }

@@ -18,6 +18,7 @@ namespace Managers
         public VirusMutations Mutations { get; set; }
         public int ChanceToMutate;
         public int ChanceToInfectParent;
+        public int ChanceToInfectRoot;
         private CoreComponent currentInfection;
 
         private float timeElapsed = 0f;
@@ -38,18 +39,117 @@ namespace Managers
         {
             int parentInfectChance = Helpers.RandomHelper.RandomInt(0, 100);
 
-            if (parentInfectChance > ChanceToInfectParent)
+            if (parentInfectChance > ChanceToInfectParent || currentInfection.CoreElement.ContainingFolder.InfectionState == InfectionState.Infected)
             {
                 if (currentInfection.CoreElement.ContainingFolder.InfectionState == InfectionState.Quarantined)
                 {
                     if (Mutations.HasFlag(VirusMutations.BreakQuarantine))
                     {
+                        var temp = currentInfection;
                         currentInfection = GameManager.UIManager.GetCoreComponent(currentInfection.CoreElement.ContainingFolder);
 
                         if (currentInfection.CoreElement.Name == "Root" && currentInfection.CoreElement.ContainingFolder == null)
                         {
-                            GameManager.State = GameState.Lose;
-                            return;
+                            if (parentInfectChance > ChanceToInfectRoot)
+                            {
+                                currentInfection.CoreElement.InfectionState = InfectionState.Infected;
+                                GameManager.State = GameState.Lose;
+                                return;
+                            }
+                            else
+                            {
+                                currentInfection = temp;
+
+                                //infect children
+
+                                bool infectedChild = false;
+
+                                if (currentInfection.CoreElement is GameFolder)
+                                {
+                                    var currentFolder = currentInfection.CoreElement as GameFolder;
+                                    foreach (var file in currentFolder.Files)
+                                    {
+                                        if (file.InfectionState != InfectionState.Infected)
+                                        {
+                                            if (file.InfectionState == InfectionState.Quarantined && Mutations.HasFlag(VirusMutations.BreakQuarantine))
+                                            {
+                                                currentInfection = GameManager.UIManager.GetCoreComponent(file);
+                                                if (Mutations.HasFlag(VirusMutations.SpreadEasier))
+                                                {
+                                                    currentInfection.Infect(20f, GameManager);
+                                                }
+                                                else
+                                                {
+                                                    currentInfection.Infect(0f, GameManager);
+                                                }
+                                                infectedChild = true;
+                                                GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                                return;
+                                            }
+                                            else if (file.InfectionState == InfectionState.Clean)
+                                            {
+                                                currentInfection = GameManager.UIManager.GetCoreComponent(file);
+                                                if (Mutations.HasFlag(VirusMutations.SpreadEasier))
+                                                {
+                                                    currentInfection.Infect(20f, GameManager);
+                                                }
+                                                else
+                                                {
+                                                    currentInfection.Infect(0f, GameManager);
+                                                }
+                                                infectedChild = true;
+                                                GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                                return;
+                                            }
+                                        }
+                                    }
+
+                                    if (!infectedChild)
+                                    {
+                                        foreach (var folder in currentFolder.Folders)
+                                        {
+                                            if (folder.InfectionState != InfectionState.Infected)
+                                            {
+                                                if (folder.InfectionState == InfectionState.Quarantined && Mutations.HasFlag(VirusMutations.BreakQuarantine))
+                                                {
+                                                    currentInfection = GameManager.UIManager.GetCoreComponent(folder);
+                                                    if (Mutations.HasFlag(VirusMutations.SpreadEasier))
+                                                    {
+                                                        currentInfection.Infect(20f, GameManager);
+                                                    }
+                                                    else
+                                                    {
+                                                        currentInfection.Infect(0f, GameManager);
+                                                    }
+                                                    infectedChild = true;
+                                                    GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                                    return;
+                                                }
+                                                else if (folder.InfectionState == InfectionState.Clean)
+                                                {
+                                                    currentInfection = GameManager.UIManager.GetCoreComponent(folder);
+                                                    if (Mutations.HasFlag(VirusMutations.SpreadEasier))
+                                                    {
+                                                        currentInfection.Infect(20f, GameManager);
+                                                    }
+                                                    else
+                                                    {
+                                                        currentInfection.Infect(0f, GameManager);
+                                                    }
+                                                    infectedChild = true;
+                                                    GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                                    return;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                if (!infectedChild)
+                                {
+                                    InfectSibling();
+                                }
+                            }
                         }
                         else
                         {
@@ -90,7 +190,7 @@ namespace Managers
                                         }
                                         infectedChild = true;
                                         GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
-                                        break;
+                                        return;
                                     }
                                     else if (file.InfectionState == InfectionState.Clean)
                                     {
@@ -105,7 +205,7 @@ namespace Managers
                                         }
                                         infectedChild = true;
                                         GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
-                                        break;
+                                        return;
                                     }
                                 }
                             }
@@ -129,7 +229,7 @@ namespace Managers
                                             }
                                             infectedChild = true;
                                             GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
-                                            break;
+                                            return;
                                         }
                                         else if (folder.InfectionState == InfectionState.Clean)
                                         {
@@ -144,26 +244,129 @@ namespace Managers
                                             }
                                             infectedChild = true;
                                             GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
-                                            break;
+                                            return;
                                         }
-
                                     }
                                 }
                             }
                         }
 
-                        InfectSibling();
+                        if (!infectedChild)
+                        {
+                            InfectSibling();
+                        }
                     }
                 }
                 else
                 {
+                    var temp = currentInfection;
+
                     currentInfection = GameManager.UIManager.GetCoreComponent(currentInfection.CoreElement.ContainingFolder);
 
                     if (currentInfection.CoreElement.Name == "Root" && currentInfection.CoreElement.ContainingFolder == null)
                     {
-                        GameManager.State = GameState.Lose;
+                        if (parentInfectChance > ChanceToInfectRoot)
+                        {
+                            currentInfection.CoreElement.InfectionState = InfectionState.Infected;
+                            GameManager.State = GameState.Lose;
+                            return;
+                        }
+                        else
+                        {
+                            currentInfection = temp;
+
+                            //infect children
+
+                            bool infectedChild = false;
+
+                            if (currentInfection.CoreElement is GameFolder)
+                            {
+                                var currentFolder = currentInfection.CoreElement as GameFolder;
+                                foreach (var file in currentFolder.Files)
+                                {
+                                    if (file.InfectionState != InfectionState.Infected)
+                                    {
+                                        if (file.InfectionState == InfectionState.Quarantined && Mutations.HasFlag(VirusMutations.BreakQuarantine))
+                                        {
+                                            currentInfection = GameManager.UIManager.GetCoreComponent(file);
+                                            if (Mutations.HasFlag(VirusMutations.SpreadEasier))
+                                            {
+                                                currentInfection.Infect(20f, GameManager);
+                                            }
+                                            else
+                                            {
+                                                currentInfection.Infect(0f, GameManager);
+                                            }
+                                            infectedChild = true;
+                                            GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                            return;
+                                        }
+                                        else if (file.InfectionState == InfectionState.Clean)
+                                        {
+                                            currentInfection = GameManager.UIManager.GetCoreComponent(file);
+                                            if (Mutations.HasFlag(VirusMutations.SpreadEasier))
+                                            {
+                                                currentInfection.Infect(20f, GameManager);
+                                            }
+                                            else
+                                            {
+                                                currentInfection.Infect(0f, GameManager);
+                                            }
+                                            infectedChild = true;
+                                            GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                            return;
+                                        }
+                                    }
+                                }
+
+                                if (!infectedChild)
+                                {
+                                    foreach (var folder in currentFolder.Folders)
+                                    {
+                                        if (folder.InfectionState != InfectionState.Infected)
+                                        {
+                                            if (folder.InfectionState == InfectionState.Quarantined && Mutations.HasFlag(VirusMutations.BreakQuarantine))
+                                            {
+                                                currentInfection = GameManager.UIManager.GetCoreComponent(folder);
+                                                if (Mutations.HasFlag(VirusMutations.SpreadEasier))
+                                                {
+                                                    currentInfection.Infect(20f, GameManager);
+                                                }
+                                                else
+                                                {
+                                                    currentInfection.Infect(0f, GameManager);
+                                                }
+                                                infectedChild = true;
+                                                GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                                return;
+                                            }
+                                            else if (folder.InfectionState == InfectionState.Clean)
+                                            {
+                                                currentInfection = GameManager.UIManager.GetCoreComponent(folder);
+                                                if (Mutations.HasFlag(VirusMutations.SpreadEasier))
+                                                {
+                                                    currentInfection.Infect(20f, GameManager);
+                                                }
+                                                else
+                                                {
+                                                    currentInfection.Infect(0f, GameManager);
+                                                }
+                                                infectedChild = true;
+                                                GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                                return;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (!infectedChild)
+                            {
+                                InfectSibling();
+                            }
+                        }
                     }
-                    else
+                    else if (currentInfection.CoreElement.ContainingFolder.InfectionState == InfectionState.Infected)
                     {
                         if (Mutations.HasFlag(VirusMutations.SpreadEasier))
                         {
@@ -174,13 +377,101 @@ namespace Managers
                             currentInfection.Infect(0f, GameManager);
                         }
                         GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                        return;
                     }
                 }
             }
             else
             {
-                //
-                InfectSibling();
+                //infect children
+
+                bool infectedChild = false;
+
+                if (currentInfection.CoreElement is GameFolder)
+                {
+                    var currentFolder = currentInfection.CoreElement as GameFolder;
+                    foreach (var file in currentFolder.Files)
+                    {
+                        if (file.InfectionState != InfectionState.Infected)
+                        {
+                            if (file.InfectionState == InfectionState.Quarantined && Mutations.HasFlag(VirusMutations.BreakQuarantine))
+                            {
+                                currentInfection = GameManager.UIManager.GetCoreComponent(file);
+                                if (Mutations.HasFlag(VirusMutations.SpreadEasier))
+                                {
+                                    currentInfection.Infect(20f, GameManager);
+                                }
+                                else
+                                {
+                                    currentInfection.Infect(0f, GameManager);
+                                }
+                                infectedChild = true;
+                                GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                return;
+                            }
+                            else if (file.InfectionState == InfectionState.Clean)
+                            {
+                                currentInfection = GameManager.UIManager.GetCoreComponent(file);
+                                if (Mutations.HasFlag(VirusMutations.SpreadEasier))
+                                {
+                                    currentInfection.Infect(20f, GameManager);
+                                }
+                                else
+                                {
+                                    currentInfection.Infect(0f, GameManager);
+                                }
+                                infectedChild = true;
+                                GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                return;
+                            }
+                        }
+                    }
+
+                    if (!infectedChild)
+                    {
+                        foreach (var folder in currentFolder.Folders)
+                        {
+                            if (folder.InfectionState != InfectionState.Infected)
+                            {
+                                if (folder.InfectionState == InfectionState.Quarantined && Mutations.HasFlag(VirusMutations.BreakQuarantine))
+                                {
+                                    currentInfection = GameManager.UIManager.GetCoreComponent(folder);
+                                    if (Mutations.HasFlag(VirusMutations.SpreadEasier))
+                                    {
+                                        currentInfection.Infect(20f, GameManager);
+                                    }
+                                    else
+                                    {
+                                        currentInfection.Infect(0f, GameManager);
+                                    }
+                                    infectedChild = true;
+                                    GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                    return;
+                                }
+                                else if (folder.InfectionState == InfectionState.Clean)
+                                {
+                                    currentInfection = GameManager.UIManager.GetCoreComponent(folder);
+                                    if (Mutations.HasFlag(VirusMutations.SpreadEasier))
+                                    {
+                                        currentInfection.Infect(20f, GameManager);
+                                    }
+                                    else
+                                    {
+                                        currentInfection.Infect(0f, GameManager);
+                                    }
+                                    infectedChild = true;
+                                    GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                    return;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (!infectedChild)
+                {
+                    InfectSibling();
+                }
             }
         }
 
@@ -313,14 +604,19 @@ namespace Managers
                             {
                                 Mutations |= VirusMutations.SpreadQuicker;
                                 Timer -= 1f;
+                                GameManager.UIManager.SpreadQuicker.SetActive(true);
                             }
                             else if (!Mutations.HasFlag(VirusMutations.SpreadEasier))
                             {
                                 Mutations |= VirusMutations.SpreadEasier;
+                                GameManager.UIManager.SpreadEasier.SetActive(true);
+
                             }
                             else if (!Mutations.HasFlag(VirusMutations.BreakQuarantine))
                             {
                                 Mutations |= VirusMutations.BreakQuarantine;
+                                GameManager.UIManager.BreakQuarantine.SetActive(true);
+
                             }
                             //update mutations display
                             //add to event log

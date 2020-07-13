@@ -17,28 +17,15 @@
                     "$type": "Core.GameFolder, Assembly-CSharp",
                     "Folders": {
                       "$type": "System.Collections.Generic.List`1[[Core.GameFolder, Assembly-CSharp]], mscorlib",
-                      "$values": [
-                        {
-                          "$type": "Core.GameFolder, Assembly-CSharp",
-                          "Folders": {
-                            "$type": "System.Collections.Generic.List`1[[Core.GameFolder, Assembly-CSharp]], mscorlib",
-                            "$values": []
-                          },
-                          "Files": {
-                            "$type": "System.Collections.Generic.List`1[[Core.GameFile, Assembly-CSharp]], mscorlib",
-                            "$values": []
-                          },
-                          "Name": "test inner inner",
-                          "InfectionState": 1
-                        }
-                      ]
+                      "$values": []
                     },
                     "Files": {
                       "$type": "System.Collections.Generic.List`1[[Core.GameFile, Assembly-CSharp]], mscorlib",
                       "$values": []
                     },
-                    "Name": "test inner",
-                    "InfectionState": 1
+                    "Name": "virus sourcecode",
+                    "InfectionState": 0,
+                    "Result": 0
                   }
                 ]
               },
@@ -50,12 +37,14 @@
                     "Extension": 2,
                     "IsVirus": true,
                     "Name": "virus",
-                    "InfectionState": 2
+                    "InfectionState": 1,
+                    "Result": 2
                   }
                 ]
               },
               "Name": "SECRET DOCUMENTS",
-              "InfectionState": 1
+              "InfectionState": 0,
+              "Result": 2
             }
           ]
         },
@@ -64,7 +53,8 @@
           "$values": []
         },
         "Name": "Desktop",
-        "InfectionState": 1
+        "InfectionState": 0,
+        "Result": 2
       },
       {
         "$type": "Core.GameFolder, Assembly-CSharp",
@@ -80,82 +70,94 @@
               "Extension": 4,
               "IsVirus": false,
               "Name": "password",
-              "InfectionState": 1
+              "InfectionState": 0,
+              "Result": 2
             },
             {
               "$type": "Core.GameFile, Assembly-CSharp",
               "Extension": 4,
               "IsVirus": false,
               "Name": "doc0",
-              "InfectionState": 1
+              "InfectionState": 0,
+              "Result": 1
             },
             {
               "$type": "Core.GameFile, Assembly-CSharp",
               "Extension": 4,
               "IsVirus": false,
               "Name": "doc1",
-              "InfectionState": 1
+              "InfectionState": 0,
+              "Result": 1
             },
             {
               "$type": "Core.GameFile, Assembly-CSharp",
               "Extension": 4,
               "IsVirus": false,
               "Name": "doc2",
-              "InfectionState": 1
+              "InfectionState": 0,
+              "Result": 1
             },
             {
               "$type": "Core.GameFile, Assembly-CSharp",
               "Extension": 4,
               "IsVirus": false,
               "Name": "doc3",
-              "InfectionState": 1
+              "InfectionState": 0,
+              "Result": 1
             },
             {
               "$type": "Core.GameFile, Assembly-CSharp",
               "Extension": 4,
               "IsVirus": false,
               "Name": "doc4",
-              "InfectionState": 1
+              "InfectionState": 0,
+              "Result": 1
             },
             {
               "$type": "Core.GameFile, Assembly-CSharp",
               "Extension": 4,
               "IsVirus": false,
               "Name": "doc5",
-              "InfectionState": 1
+              "InfectionState": 0,
+              "Result": 1
             },
             {
               "$type": "Core.GameFile, Assembly-CSharp",
               "Extension": 4,
               "IsVirus": false,
               "Name": "doc6",
-              "InfectionState": 1
+              "InfectionState": 0,
+              "Result": 1
             },
             {
               "$type": "Core.GameFile, Assembly-CSharp",
               "Extension": 4,
               "IsVirus": false,
               "Name": "doc7",
-              "InfectionState": 1
+              "InfectionState": 0,
+              "Result": 1
             },
             {
               "$type": "Core.GameFile, Assembly-CSharp",
               "Extension": 4,
               "IsVirus": false,
               "Name": "doc8",
-              "InfectionState": 1
+              "InfectionState": 0,
+              "Result": 1
             },
             {
               "$type": "Core.GameFile, Assembly-CSharp",
               "Extension": 4,
               "IsVirus": false,
               "Name": "doc9",
-              "InfectionState": 1
+              "InfectionState": 0,
+              "Result": 2
             }
           ]
         },
         "Name": "Documents",
-        "InfectionState": 1
+        "InfectionState": 0,
+        "Result": 2
       },
       {
         "$type": "Core.GameFolder, Assembly-CSharp",
@@ -171,19 +173,22 @@
               "Extension": 1,
               "IsVirus": false,
               "Name": "q0rn",
-              "InfectionState": 1
+              "InfectionState": 0,
+              "Result": 2
             },
             {
               "$type": "Core.GameFile, Assembly-CSharp",
               "Extension": 5,
               "IsVirus": false,
               "Name": "hill",
-              "InfectionState": 1
+              "InfectionState": 0,
+              "Result": 2
             }
           ]
         },
         "Name": "Images",
-        "InfectionState": 1
+        "InfectionState": 0,
+        "Result": 0
       },
       {
         "$type": "Core.GameFolder, Assembly-CSharp",
@@ -199,12 +204,14 @@
               "Extension": 4,
               "IsVirus": false,
               "Name": "actual password",
-              "InfectionState": 1
+              "InfectionState": 0,
+              "Result": 1
             }
           ]
         },
         "Name": "Recycle Bin",
-        "InfectionState": 1
+        "InfectionState": 0,
+        "Result": 0
       }
     ]
   },
@@ -214,5 +221,6 @@
   },
   "Name": "Root",
   "ContainingFolder": null,
-  "InfectionState": 1
+  "InfectionState": 0,
+  "Result": 2
 }

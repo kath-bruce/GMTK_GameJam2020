@@ -17,6 +17,15 @@ namespace Managers
                 if (state == GameState.Win)
                 {
                     Win.SetActive(true);
+
+                    if (PlayerManager.Password.CompletedPassword())
+                    {
+                        Win.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = $"You Won!\nYou found the password to deactivate the virus\nTime: {TimeElapsed.TimeElapsed.ToString("#0.00")}s";
+                    }
+                    else if (PlayerManager.Licenses.HasFlag(Licenses.QuarantineVirus))
+                    {
+                        Win.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = $"You Won!\nYou quarantined the virus!\nTime: {TimeElapsed.TimeElapsed.ToString("#0.00")}s";
+                    }
                 }
                 else if (state == GameState.Lose)
                 {
@@ -35,6 +44,7 @@ namespace Managers
         public GameObject UIManGameObj;
         public GameObject UserManGameObj;
         public GameObject VirusManGameObj;
+        public TimeElapsedComponent TimeElapsed;
 
         public GameObject Win;
         public GameObject Lose;
