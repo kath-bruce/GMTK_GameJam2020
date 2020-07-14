@@ -105,7 +105,7 @@ namespace Managers
                                                     currentInfection.Infect(0f, GameManager);
                                                 }
                                                 infectedChild = true;
-                                                GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                                GameManager.ComputerManager.AddToEventLog($"Infected {currentInfection.CoreElement.Name}", new Color(0.75f, 0f, 1f));
                                                 return;
                                             }
                                             else if (file.InfectionState == InfectionState.Clean)
@@ -120,7 +120,7 @@ namespace Managers
                                                     currentInfection.Infect(0f, GameManager);
                                                 }
                                                 infectedChild = true;
-                                                GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                                GameManager.ComputerManager.AddToEventLog($"Infected {currentInfection.CoreElement.Name}", new Color(0.75f, 0f, 1f));
                                                 return;
                                             }
                                         }
@@ -144,7 +144,7 @@ namespace Managers
                                                         currentInfection.Infect(0f, GameManager);
                                                     }
                                                     infectedChild = true;
-                                                    GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                                    GameManager.ComputerManager.AddToEventLog($"Infected {currentInfection.CoreElement.Name}", new Color(0.75f, 0f, 1f));
                                                     return;
                                                 }
                                                 else if (folder.InfectionState == InfectionState.Clean)
@@ -159,7 +159,7 @@ namespace Managers
                                                         currentInfection.Infect(0f, GameManager);
                                                     }
                                                     infectedChild = true;
-                                                    GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                                    GameManager.ComputerManager.AddToEventLog($"Infected {currentInfection.CoreElement.Name}", new Color(0.75f, 0f, 1f));
                                                     return;
                                                 }
                                             }
@@ -183,7 +183,7 @@ namespace Managers
                             {
                                 currentInfection.Infect(0f, GameManager);
                             }
-                            GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                            GameManager.ComputerManager.AddToEventLog($"Infected {currentInfection.CoreElement.Name}", new Color(0.75f, 0f, 1f));
                         }
                     }
                     else
@@ -211,7 +211,7 @@ namespace Managers
                                             currentInfection.Infect(0f, GameManager);
                                         }
                                         infectedChild = true;
-                                        GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                        GameManager.ComputerManager.AddToEventLog($"Infected {currentInfection.CoreElement.Name}", new Color(0.75f, 0f, 1f));
                                         return;
                                     }
                                     else if (file.InfectionState == InfectionState.Clean)
@@ -226,7 +226,7 @@ namespace Managers
                                             currentInfection.Infect(0f, GameManager);
                                         }
                                         infectedChild = true;
-                                        GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                        GameManager.ComputerManager.AddToEventLog($"Infected {currentInfection.CoreElement.Name}", new Color(0.75f, 0f, 1f));
                                         return;
                                     }
                                 }
@@ -250,7 +250,7 @@ namespace Managers
                                                 currentInfection.Infect(0f, GameManager);
                                             }
                                             infectedChild = true;
-                                            GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                            GameManager.ComputerManager.AddToEventLog($"Infected {currentInfection.CoreElement.Name}", new Color(0.75f, 0f, 1f));
                                             return;
                                         }
                                         else if (folder.InfectionState == InfectionState.Clean)
@@ -265,7 +265,7 @@ namespace Managers
                                                 currentInfection.Infect(0f, GameManager);
                                             }
                                             infectedChild = true;
-                                            GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                            GameManager.ComputerManager.AddToEventLog($"Infected {currentInfection.CoreElement.Name}", new Color(0.75f, 0f, 1f));
                                             return;
                                         }
                                     }
@@ -320,7 +320,7 @@ namespace Managers
                                                 currentInfection.Infect(0f, GameManager);
                                             }
                                             infectedChild = true;
-                                            GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                            GameManager.ComputerManager.AddToEventLog($"Infected {currentInfection.CoreElement.Name}", new Color(0.75f, 0f, 1f));
                                             return;
                                         }
                                         else if (file.InfectionState == InfectionState.Clean)
@@ -335,7 +335,7 @@ namespace Managers
                                                 currentInfection.Infect(0f, GameManager);
                                             }
                                             infectedChild = true;
-                                            GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                            GameManager.ComputerManager.AddToEventLog($"Infected {currentInfection.CoreElement.Name}", new Color(0.75f, 0f, 1f));
                                             return;
                                         }
                                     }
@@ -359,7 +359,7 @@ namespace Managers
                                                     currentInfection.Infect(0f, GameManager);
                                                 }
                                                 infectedChild = true;
-                                                GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                                GameManager.ComputerManager.AddToEventLog($"Infected {currentInfection.CoreElement.Name}", new Color(0.75f, 0f, 1f));
                                                 return;
                                             }
                                             else if (folder.InfectionState == InfectionState.Clean)
@@ -374,7 +374,7 @@ namespace Managers
                                                     currentInfection.Infect(0f, GameManager);
                                                 }
                                                 infectedChild = true;
-                                                GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                                GameManager.ComputerManager.AddToEventLog($"Infected {currentInfection.CoreElement.Name}", new Color(0.75f, 0f, 1f));
                                                 return;
                                             }
                                         }
@@ -398,7 +398,7 @@ namespace Managers
                         {
                             currentInfection.Infect(0f, GameManager);
                         }
-                        GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                        GameManager.ComputerManager.AddToEventLog($"Infected {currentInfection.CoreElement.Name}", new Color(0.75f, 0f, 1f));
                         return;
                     }
                 }
@@ -428,7 +428,7 @@ namespace Managers
                                     currentInfection.Infect(0f, GameManager);
                                 }
                                 infectedChild = true;
-                                GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                GameManager.ComputerManager.AddToEventLog($"Infected {currentInfection.CoreElement.Name}", new Color(0.75f, 0f, 1f));
                                 return;
                             }
                             else if (file.InfectionState == InfectionState.Clean)
@@ -443,7 +443,7 @@ namespace Managers
                                     currentInfection.Infect(0f, GameManager);
                                 }
                                 infectedChild = true;
-                                GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                GameManager.ComputerManager.AddToEventLog($"Infected {currentInfection.CoreElement.Name}", new Color(0.75f, 0f, 1f));
                                 return;
                             }
                         }
@@ -467,7 +467,7 @@ namespace Managers
                                         currentInfection.Infect(0f, GameManager);
                                     }
                                     infectedChild = true;
-                                    GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                    GameManager.ComputerManager.AddToEventLog($"Infected {currentInfection.CoreElement.Name}", new Color(0.75f, 0f, 1f));
                                     return;
                                 }
                                 else if (folder.InfectionState == InfectionState.Clean)
@@ -482,7 +482,7 @@ namespace Managers
                                         currentInfection.Infect(0f, GameManager);
                                     }
                                     infectedChild = true;
-                                    GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                                    GameManager.ComputerManager.AddToEventLog($"Infected {currentInfection.CoreElement.Name}", new Color(0.75f, 0f, 1f));
                                     return;
                                 }
                             }
@@ -523,7 +523,7 @@ namespace Managers
                             currentInfection.Infect(0f, GameManager);
                         }
 
-                        GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                        GameManager.ComputerManager.AddToEventLog($"Infected {currentInfection.CoreElement.Name}", new Color(0.75f, 0f, 1f));
                         infectedSibling = true;
                         return;
                     }
@@ -540,7 +540,7 @@ namespace Managers
                         {
                             currentInfection.Infect(0f, GameManager);
                         }
-                        GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                        GameManager.ComputerManager.AddToEventLog($"Infected {currentInfection.CoreElement.Name}", new Color(0.75f, 0f, 1f));
 
                         infectedSibling = true;
                         return;
@@ -566,7 +566,7 @@ namespace Managers
                             {
                                 currentInfection.Infect(0f, GameManager);
                             }
-                            GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                            GameManager.ComputerManager.AddToEventLog($"Infected {currentInfection.CoreElement.Name}", new Color(0.75f, 0f, 1f));
 
                             return;
                         }
@@ -583,7 +583,7 @@ namespace Managers
                             {
                                 currentInfection.Infect(0f, GameManager);
                             }
-                            GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
+                            GameManager.ComputerManager.AddToEventLog($"Infected {currentInfection.CoreElement.Name}", new Color(0.75f, 0f, 1f));
                             return;
                         }
                     }

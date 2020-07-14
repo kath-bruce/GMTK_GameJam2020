@@ -1,7 +1,6 @@
 TODO
 
 WILL NEED TO PUT A DISCLAIMER ON THIS THAT IT'S NOT ACCURATE TO REAL LIFE COMPUTING!!!!!!!!!!!!!
-	!- add to event log - which may need scripted scrolling but that should be easy enough
 	!- tutorial - click through slideshow - is start screen
 	- clean up
 	- visuals - border background so middle bit alpha is zero

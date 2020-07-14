@@ -53,13 +53,13 @@ public class CoreComponent : MonoBehaviour
                             if (file.InfectionState == InfectionState.Clean)
                             {
                                 getCoreComponent(file).Infect(0f, manager);
-                                log("Infected", Color.red);
+                                log($"Infected {CoreElement.Name}", new Color(0.75f, 0f, 1f));
                                 return;
                             }
                             else if (file.InfectionState == InfectionState.Quarantined && hasBreakQuarantineMutation())
                             {
                                 getCoreComponent(file).Infect(0f, manager);
-                                log("Infected", Color.red);
+                                log($"Infected {CoreElement.Name}", new Color(0.75f, 0f, 1f));
                                 return;
                             }
                         }
@@ -76,13 +76,13 @@ public class CoreComponent : MonoBehaviour
                             if (folder.InfectionState == InfectionState.Clean)
                             {
                                 getCoreComponent(folder).Infect(0f, manager);
-                                log("Infected", Color.red);
+                                log($"Infected {CoreElement.Name}", new Color(0.75f, 0f, 1f));
                                 return;
                             }
                             else if (folder.InfectionState == InfectionState.Quarantined && hasBreakQuarantineMutation())
                             {
                                 getCoreComponent(folder).Infect(0f, manager);
-                                log("Infected", Color.red);
+                                log($"Infected {CoreElement.Name}", new Color(0.75f, 0f, 1f));
                                 return;
                             }
                         }
@@ -102,13 +102,13 @@ public class CoreComponent : MonoBehaviour
                                 if (file.InfectionState == InfectionState.Clean)
                                 {
                                     getCoreComponent(file).Infect(0f, manager);
-                                    log("Infected", Color.red);
+                                    log($"Infected {CoreElement.Name}", new Color(0.75f, 0f, 1f));
                                     return;
                                 }
                                 else if (file.InfectionState == InfectionState.Quarantined && hasBreakQuarantineMutation())
                                 {
                                     getCoreComponent(file).Infect(0f, manager);
-                                    log("Infected", Color.red);
+                                    log($"Infected {CoreElement.Name}", new Color(0.75f, 0f, 1f));
                                     return;
                                 }
                             }
@@ -124,13 +124,13 @@ public class CoreComponent : MonoBehaviour
                                 if (innerFolder.InfectionState == InfectionState.Clean)
                                 {
                                     getCoreComponent(folder).Infect(0f, manager);
-                                    log("Infected", Color.red);
+                                    log($"Infected {CoreElement.Name}", new Color(0.75f, 0f, 1f));
                                     return;
                                 }
                                 else if (innerFolder.InfectionState == InfectionState.Quarantined && hasBreakQuarantineMutation())
                                 {
                                     getCoreComponent(folder).Infect(0f, manager);
-                                    log("Infected", Color.red);
+                                    log($"Infected {CoreElement.Name}", new Color(0.75f, 0f, 1f));
                                     return;
                                 }
                             }
@@ -151,11 +151,12 @@ public class CoreComponent : MonoBehaviour
                 if (CoreElement.InfectionState == InfectionState.Clean)
                 {
                     GetComponent<TextMeshProUGUI>().color = Color.white;
-
+                    manager.ComputerManager.AddToEventLog($"Quarantined on {CoreElement.Name} expired ", Color.white);
                 }
                 else if (CoreElement.InfectionState == InfectionState.Infected)
                 {
                     GetComponent<TextMeshProUGUI>().color = new Color(0.75f, 0f, 1f);
+                    manager.ComputerManager.AddToEventLog($"Quarantined on {CoreElement.Name} expired ", new Color(0.75f, 0f, 1f));
                 }
 
                 elapsedQTime = 0f;

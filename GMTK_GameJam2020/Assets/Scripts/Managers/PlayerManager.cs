@@ -447,6 +447,8 @@ namespace Managers
                     Licenses |= Licenses.QuarantineVirus;
                     GameManager.UIManager.QuarantineVirus.SetActive(true);
                 }
+
+                GameManager.ComputerManager.AddToEventLog("Found license upgrade!", Color.green);
             }
             else if (selectedEntry.CoreElement.Result == ScanResult.PasswordLetter)
             {
@@ -456,6 +458,8 @@ namespace Managers
                 }
 
                 Password.AddLetter();
+
+                GameManager.ComputerManager.AddToEventLog("Found password letter!", Color.green);
 
                 usedLetters.Add(selectedEntry);
 
@@ -517,11 +521,13 @@ namespace Managers
             {
                 //WON
                 selectedEntry.Quarantine(float.MaxValue, GameManager);
+                GameManager.ComputerManager.AddToEventLog($"Quarantined {selectedEntry.CoreElement.Name}", Color.cyan);
                 GameManager.State = GameState.Win;
             }
             else
             {
                 selectedEntry.Quarantine(QuarantineTime, GameManager);
+                GameManager.ComputerManager.AddToEventLog($"Quarantined {selectedEntry.CoreElement.Name}", Color.cyan);
             }
         }
 
@@ -529,6 +535,7 @@ namespace Managers
         {
             selectedEntry.CoreElement.InfectionState = InfectionState.Clean;
             selectedEntry.GetComponent<TextMeshProUGUI>().color = Color.white;
+            GameManager.ComputerManager.AddToEventLog($"Cleaned {selectedEntry.CoreElement.Name}!", Color.white);
         }
 
         void OnSubmit(InputValue value)
