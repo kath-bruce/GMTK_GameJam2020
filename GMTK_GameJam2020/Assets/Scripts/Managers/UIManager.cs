@@ -11,7 +11,6 @@ namespace Managers
     {
         public GameManager GameManager { get; set; }
 
-        public Canvas Canvas;
         public GameObject ContentView;
         public GameObject RootPrefab;
         public GameObject Popup;
@@ -25,6 +24,25 @@ namespace Managers
         public GameObject BetterQuarantine;
         public GameObject CleanInfected;
         public GameObject QuarantineVirus;
+
+        public void Restart()
+        {
+            //clear file system
+            for (int i = 0; i < ContentView.transform.childCount; i++)
+            {
+                Destroy(ContentView.transform.GetChild(i).gameObject);
+            }
+
+            SpreadEasier.SetActive(false);
+            SpreadQuicker.SetActive(false);
+            BreakQuarantine.SetActive(false);
+            BetterQuarantine.SetActive(false);
+            CleanInfected.SetActive(false);
+            QuarantineVirus.SetActive(false);
+
+            Popup.SetActive(false);
+            FileSystemViewPort.parent.GetComponent<ScrollRect>().verticalNormalizedPosition = 1f;
+        }
 
         public void SetEventLogScroll()
         {

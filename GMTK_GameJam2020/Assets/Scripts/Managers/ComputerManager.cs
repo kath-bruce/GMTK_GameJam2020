@@ -65,6 +65,17 @@ namespace Managers
             GameManager.VirusManager.SetVirusFile(Root.GetVirus());
         }
 
+        public void Restart()
+        {
+            //clear log
+            for (int i = 0; i < EventLog.transform.childCount; i++)
+            {
+                Destroy(EventLog.transform.GetChild(i).gameObject);
+            }
+
+            Start();
+        }
+
         public void AddToEventLog(string logText, Color textColor)
         {
             var eventText = Instantiate(EventPrefab, Vector3.zero, Quaternion.identity, EventLog.transform);

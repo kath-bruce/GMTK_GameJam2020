@@ -6,14 +6,10 @@ using Managers;
 public class LoseComponent : MonoBehaviour
 {
     public GameManager GameManager;
-    public void SetLoseText(string losetext)
-    {
-        //???????????????
-    }
 
     public void Restart()
     {
-        //???????????????
+        GameManager.Restart();
 
         this.gameObject.SetActive(false);
     }

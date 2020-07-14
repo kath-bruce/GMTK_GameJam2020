@@ -7,14 +7,9 @@ public class WinComponent : MonoBehaviour
 {
     public GameManager GameManager;
 
-    public void SetWinText(string wintext)
-    {
-        //???????????????
-    }
-
     public void Restart()
     {
-        //???????????????
+        GameManager.Restart();
 
         this.gameObject.SetActive(false);
     }

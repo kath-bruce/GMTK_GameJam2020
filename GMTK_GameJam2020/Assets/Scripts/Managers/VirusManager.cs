@@ -22,6 +22,28 @@ namespace Managers
         private CoreComponent currentInfection;
 
         private float timeElapsed = 0f;
+        private float delay = 5f;
+        private float delayElapsed = 10f;
+
+        public void Restart()
+        {
+            //
+            if (Mutations.HasFlag(VirusMutations.BreakQuarantine))
+            {
+                Mutations &= ~VirusMutations.BreakQuarantine;
+            }
+            if (Mutations.HasFlag(VirusMutations.SpreadQuicker))
+            {
+                Mutations &= ~VirusMutations.SpreadQuicker;
+            }
+            if (Mutations.HasFlag(VirusMutations.SpreadEasier))
+            {
+                Mutations &= ~VirusMutations.SpreadEasier;
+            }
+            Mutations = VirusMutations.None;
+            delayElapsed = 10f;
+            currentInfection = null;
+        }
 
         public void SetVirusFile(GameFile virus)
         {
@@ -503,7 +525,7 @@ namespace Managers
 
                         GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
                         infectedSibling = true;
-                        break;
+                        return;
                     }
                     else if (sibling.InfectionState == InfectionState.Quarantined
                     && Mutations.HasFlag(VirusMutations.BreakQuarantine))
@@ -521,7 +543,7 @@ namespace Managers
                         GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
 
                         infectedSibling = true;
-                        break;
+                        return;
                     }
                 }
             }
@@ -546,7 +568,7 @@ namespace Managers
                             }
                             GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
 
-                            break;
+                            return;
                         }
                         else if (sibling.InfectionState == InfectionState.Quarantined
                         && Mutations.HasFlag(VirusMutations.BreakQuarantine))
@@ -562,7 +584,7 @@ namespace Managers
                                 currentInfection.Infect(0f, GameManager);
                             }
                             GameManager.ComputerManager.AddToEventLog("Infected", Color.red);
-                            break;
+                            return;
                         }
                     }
                 }
@@ -570,10 +592,30 @@ namespace Managers
             }
         }
 
+        public void Delay()
+        {
+            delayElapsed = 0f;
+        }
+
+        public bool IsDelayed()
+        {
+            return (delay > delayElapsed);
+        }
+
         void Update()
         {
+            if (Timer < 0f)
+            {
+                Timer = 0f;
+            }
+
             if (GameManager.State == GameState.Playing)
             {
+                if (delay > delayElapsed) //if not finished delay
+                {
+                    delayElapsed += Time.deltaTime;
+                    return;
+                }
 
                 timeElapsed += Time.deltaTime;
 
@@ -610,13 +652,11 @@ namespace Managers
                             {
                                 Mutations |= VirusMutations.SpreadEasier;
                                 GameManager.UIManager.SpreadEasier.SetActive(true);
-
                             }
                             else if (!Mutations.HasFlag(VirusMutations.BreakQuarantine))
                             {
                                 Mutations |= VirusMutations.BreakQuarantine;
                                 GameManager.UIManager.BreakQuarantine.SetActive(true);
-
                             }
                             //update mutations display
                             //add to event log

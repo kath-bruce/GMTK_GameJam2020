@@ -7,7 +7,7 @@ using Managers;
 public class TimeElapsedComponent : MonoBehaviour
 {
     private TextMeshProUGUI timeText;
-    public float TimeElapsed { get; private set; } = 0f;
+    public float TimeElapsed { get; set; } = 0f;
     GameManager gameManager;
 
     void Start()

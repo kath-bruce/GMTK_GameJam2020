@@ -35,7 +35,7 @@ public class CoreComponent : MonoBehaviour
 
     void Update()
     {
-        if (CoreElement.InfectionState == InfectionState.Infected && startInfecting && manager.State == GameState.Playing)
+        if (CoreElement.InfectionState == InfectionState.Infected && startInfecting && manager.State == GameState.Playing && !manager.VirusManager.IsDelayed())
         {
             //only infect siblings and children
             elapsedTime += Time.deltaTime;

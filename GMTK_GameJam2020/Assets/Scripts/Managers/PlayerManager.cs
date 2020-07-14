@@ -27,16 +27,21 @@ namespace Managers
         private List<MenuAction> menuOptions = new List<MenuAction>();
 
         public float QuarantineTime;
+        private float initQTime;
 
         public PasswordComponent Password;
 
         List<CoreComponent> usedLetters = new List<CoreComponent>();
+        private float delay = 5f;
+        private float delayElapsed = 10f;
 
         void Start()
         {
             menuOptions.Add(new MenuAction("Scan", Scan)); //0
             menuOptions.Add(new MenuAction("Quarantine", Quarantine)); //1
             menuOptions.Add(new MenuAction("Clean", Clean)); //2
+
+            initQTime = QuarantineTime;
         }
 
         public void SetSelectedEntry(CoreComponent coreComp)
@@ -73,7 +78,7 @@ namespace Managers
 
         void OnNavigate(InputValue value)
         {
-            if (GameManager.State != GameState.Playing)
+            if (GameManager.State != GameState.Playing || (delayElapsed < delay))
             {
                 return;
             }
@@ -403,7 +408,7 @@ namespace Managers
 
         void OnAction(InputValue value)
         {
-            if (GameManager.State != GameState.Playing || NavState == PlayerNavigationState.MenuPopup)
+            if (GameManager.State != GameState.Playing || NavState == PlayerNavigationState.MenuPopup || (delayElapsed < delay))
             {
                 return;
             }
@@ -528,7 +533,7 @@ namespace Managers
 
         void OnSubmit(InputValue value)
         {
-            if (GameManager.State != GameState.Playing)
+            if (GameManager.State != GameState.Playing || (delayElapsed < delay))
             {
                 return;
             }
@@ -545,7 +550,7 @@ namespace Managers
 
         void OnCancel(InputValue value)
         {
-            if (GameManager.State != GameState.Playing)
+            if (GameManager.State != GameState.Playing || (delayElapsed < delay))
             {
                 return;
             }
@@ -553,6 +558,45 @@ namespace Managers
             GameManager.UIManager.ClosePopup();
 
             NavState = PlayerNavigationState.FileSystem;
+        }
+
+        public void Delay()
+        {
+            delayElapsed = 0f;
+        }
+
+        void Update()
+        {
+            if (delayElapsed < delay) //if not finish delay
+            {
+                delayElapsed += Time.deltaTime;
+            }
+        }
+
+        public void Restart()
+        {
+            DeselectMenuEntry();
+            NavState = PlayerNavigationState.FileSystem;
+            delayElapsed = 10f;
+            Password.Restart();
+            QuarantineTime = initQTime;
+
+            if (Licenses.HasFlag(Licenses.BetterQuarantine))
+            {
+                Licenses &= ~Licenses.BetterQuarantine;
+            }
+            if (Licenses.HasFlag(Licenses.QuarantineVirus))
+            {
+                Licenses &= ~Licenses.QuarantineVirus;
+            }
+            if (Licenses.HasFlag(Licenses.CleanInfected))
+            {
+                Licenses &= ~Licenses.CleanInfected;
+            }
+
+            Licenses = Licenses.None;
+            usedLetters = null;
+            usedLetters = new List<CoreComponent>();
         }
 
     }

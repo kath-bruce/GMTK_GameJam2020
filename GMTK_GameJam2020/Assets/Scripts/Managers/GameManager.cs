@@ -65,5 +65,17 @@ namespace Managers
             UserManager.GameManager = this;
             VirusManager.GameManager = this;
         }
+
+        public void Restart()
+        {
+            //RESTART
+            VirusManager.Restart();
+            UIManager.Restart();
+            ComputerManager.Restart();
+            PlayerManager.Restart();
+            UserManager.Restart();
+            TimeElapsed.TimeElapsed = 0f;
+            State = GameState.Playing;
+        }
     }
 }

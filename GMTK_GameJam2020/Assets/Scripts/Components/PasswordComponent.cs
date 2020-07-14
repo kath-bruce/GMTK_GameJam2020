@@ -14,6 +14,7 @@ public class PasswordComponent : MonoBehaviour
     {
         currentPassword = GetComponent<TextMeshProUGUI>();
         currentPassword.text = new string('_', Password.Length);
+        revealedChars = 0;
     }
 
     public void AddLetter()
@@ -25,5 +26,10 @@ public class PasswordComponent : MonoBehaviour
     public bool CompletedPassword()
     {
         return revealedChars == Password.Length;
+    }
+
+    public void Restart()
+    {
+        Start();
     }
 }
