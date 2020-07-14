@@ -101,7 +101,7 @@ namespace Managers
             {
                 //help player - delay virus
                 GameManager.VirusManager.Delay();
-                GameManager.ComputerManager.AddToEventLog("User has rebooted the PC - Virus spread delayed!", Color.green);
+                GameManager.ComputerManager.AddToEventLog("User has rebooted the PC - Virus spread delayed!", new Color(0f, .8f, 0f));
             }
             else if (helpChance == 1)
             {
@@ -131,7 +131,7 @@ namespace Managers
                 GameManager.UIManager.SpreadQuicker.SetActive(false);
             }
 
-            GameManager.ComputerManager.AddToEventLog("User has restored PC - Virus has lost a mutation!", Color.green);
+            GameManager.ComputerManager.AddToEventLog("User has restored PC - Virus has lost a mutation!", new Color(0f, .8f, 0f));
         }
 
         void OpenInfectedFile()

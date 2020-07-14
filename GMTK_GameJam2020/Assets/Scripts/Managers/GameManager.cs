@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Managers
 {
-    public enum GameState { Playing, Win, Lose }
+    public enum GameState { Playing, Win, Lose, Tutorial }
     public class GameManager : MonoBehaviour
     {
         private GameState state;
@@ -31,6 +31,10 @@ namespace Managers
                 {
                     Lose.SetActive(true);
                 }
+                else if (state == GameState.Playing)
+                {
+                    Tutorial.SetActive(false);
+                }
             }
         }
         public ComputerManager ComputerManager { get; set; }
@@ -48,10 +52,16 @@ namespace Managers
 
         public GameObject Win;
         public GameObject Lose;
+        public GameObject Tutorial;
+
+        public void StartGame()
+        {
+            State = GameState.Playing;
+        }
 
         void Awake()
         {
-            State = GameState.Playing;
+            State = GameState.Tutorial;
 
             ComputerManager = CompManGameObj.GetComponent<ComputerManager>();
             PlayerManager = PlayManGameObj.GetComponent<PlayerManager>();

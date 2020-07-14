@@ -781,7 +781,7 @@
                 },
                 {
                     "name": "Cancel",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "22841dc3-14f3-492c-9dff-5d8cb37deae7",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -789,7 +789,7 @@
                 },
                 {
                     "name": "Submit",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "171296e2-4c94-406f-8804-cbf89df07188",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -950,6 +950,55 @@
                     "action": "Submit",
                     "isComposite": false,
                     "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Tutorial",
+            "id": "e0b3179c-487a-4766-8d0d-87e4073d0670",
+            "actions": [
+                {
+                    "name": "CycleThroughTutorial",
+                    "type": "Button",
+                    "id": "58eee019-fa7f-4cba-925c-0e3f63b23fd2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "Mouse",
+                    "id": "f34d8b94-de5a-496a-9073-b54b452cfab6",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CycleThroughTutorial",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "e605b03a-ecfe-4a7b-b789-4304ca5d33c2",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "CycleThroughTutorial",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "1be8a376-075f-45b3-8862-df63180178d6",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "CycleThroughTutorial",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }

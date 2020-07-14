@@ -14,6 +14,7 @@ namespace Managers
     {
         public GameManager GameManager { get; set; }
         public float Timer;
+        private float initTimer;
         public GameFile VirusFile { get; set; }
         public VirusMutations Mutations { get; set; }
         public int ChanceToMutate;
@@ -24,6 +25,11 @@ namespace Managers
         private float timeElapsed = 0f;
         private float delay = 5f;
         private float delayElapsed = 10f;
+
+        void Start()
+        {
+            initTimer = Timer;
+        }
 
         public void Restart()
         {
@@ -43,6 +49,7 @@ namespace Managers
             Mutations = VirusMutations.None;
             delayElapsed = 10f;
             currentInfection = null;
+            Timer = initTimer;
         }
 
         public void SetVirusFile(GameFile virus)

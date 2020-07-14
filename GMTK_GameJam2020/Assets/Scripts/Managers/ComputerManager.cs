@@ -56,10 +56,10 @@ namespace Managers
             bin.Files.Add(new GameFile("actual password", GameFileExtension.TXT, bin, InfectionState.Clean, ScanResult.PasswordLetter, false));
             Root.Folders.Add(bin);
 
-            Helpers.JsonHelper.SaveJson(Root, Path.Combine(Application.dataPath, "filesystem.json"));
+            //Helpers.JsonHelper.SaveJson(Root, Path.Combine(Application.dataPath, "filesystem.json"));
 
-            Root = Helpers.JsonHelper.LoadJson(Path.Combine(Application.dataPath, "filesystem.json"));
-            Root.SetParents();
+            //Root = Helpers.JsonHelper.LoadJson(Path.Combine(Application.dataPath, "filesystem.json"));
+            //Root.SetParents();
 
             GameManager.UIManager.SetUpFileSystem(Root);
             GameManager.VirusManager.SetVirusFile(Root.GetVirus());

@@ -448,7 +448,7 @@ namespace Managers
                     GameManager.UIManager.QuarantineVirus.SetActive(true);
                 }
 
-                GameManager.ComputerManager.AddToEventLog("Found license upgrade!", Color.green);
+                GameManager.ComputerManager.AddToEventLog("Found license upgrade!", new Color(0f, .8f, 0f));
             }
             else if (selectedEntry.CoreElement.Result == ScanResult.PasswordLetter)
             {
@@ -459,7 +459,7 @@ namespace Managers
 
                 Password.AddLetter();
 
-                GameManager.ComputerManager.AddToEventLog("Found password letter!", Color.green);
+                GameManager.ComputerManager.AddToEventLog("Found password letter!", new Color(0f, .8f, 0f));
 
                 usedLetters.Add(selectedEntry);
 
