@@ -27,6 +27,11 @@ namespace Managers
 
         void Update()
         {
+            if (GameManager.State != GameState.Playing)
+            {
+                return;
+            }
+
             //every 10 - 15s, do something weird
 
             elapsedTime += Time.deltaTime;
@@ -101,7 +106,7 @@ namespace Managers
             {
                 //help player - delay virus
                 GameManager.VirusManager.Delay();
-                GameManager.ComputerManager.AddToEventLog("User has rebooted the PC - Virus spread delayed!", new Color(0f, .8f, 0f));
+                GameManager.ComputerManager.AddToEventLog("User has rebooted the PC - Virus spread delayed!", new Color(0.1f, 0.5f, 0f));
             }
             else if (helpChance == 1)
             {
@@ -131,7 +136,7 @@ namespace Managers
                 GameManager.UIManager.SpreadQuicker.SetActive(false);
             }
 
-            GameManager.ComputerManager.AddToEventLog("User has restored PC - Virus has lost a mutation!", new Color(0f, .8f, 0f));
+            GameManager.ComputerManager.AddToEventLog("User has restored PC - Virus has lost a mutation!", new Color(0.1f, 0.5f, 0f));
         }
 
         void OpenInfectedFile()

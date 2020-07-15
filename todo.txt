@@ -2,5 +2,4 @@ TODO
 
 WILL NEED TO PUT A DISCLAIMER ON THIS THAT IT'S NOT ACCURATE TO REAL LIFE COMPUTING!!!!!!!!!!!!!
 	- clean up -- LAST THING TO DO!!!!!!!!!!!!!!!!!!!!!!!!!!
-	- visuals - border background so middle bit alpha is zero
 	- sound fx - on events, depending if good or bad
